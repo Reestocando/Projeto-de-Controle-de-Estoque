@@ -11,9 +11,8 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
   * Pedro Agnaldo Zacarias Amancio
 
 ## Descrição:
-
-  O trabalho terá como tema o desenvolvimento de um software de controle e gestão de vendas de um mercado, oferecendo uma solução abrangente para gerenciar vendas, funcionarios e produtos de forma eficaz. Nesse software será possível cadastrar, atualizar, detalhar, repor e remover informações relacionadas a vendas, funcionarios e produtos.
-  Além disso, o software será projetado para atender às necessidades de diferentes usuários, cada um com seu próprio nível de acesso e permissões. Isso significa que diferentes tipos de usuários terão acesso a funcionalidades específicas, garantindo a segurança e a confidencialidade dos dados.
+  O trabalho abordará o desenvolvimento de um software destinado ao controle e gestão das vendas em um mercado. Essa aplicação oferecerá uma solução completa para gerenciar eficazmente as transações de vendas, bem como os funcionários e os produtos disponíveis. O software permitirá  cadastrar, atualizar, detalhar, repor e remover informações relacionadas às vendas, aos funcionários e aos produtos(estoque).
+  Além disso, o software será projetado de forma a atender às necessidades diversificadas de seus usuários. Cada usuário terá seu próprio nível de acesso e permissões, o que significa que diferentes tipos de usuários poderão acessar funcionalidades específicas de acordo com suas responsabilidades. Esse sistema de permissões garantirá não apenas a segurança dos dados, mas também a confidencialidade das informações, assegurando uma gestão segura e eficiente.
 
 ## Tecnologias Utilizadas:
 <table>
