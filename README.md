@@ -2,10 +2,9 @@
 Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavras
 
 ## Visão Geral:
-  * [Equipe](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque/edit/main/README.md#equipe)
-  * [Descrição](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque/edit/main/README.md#descri%C3%A7%C3%A3o)
-  * [Tecnologias Utilizadas](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque/edit/main/README.md#tecnologias-utilizadas)
-
+  * [Equipe](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#equipe)
+  * [Descrição](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#descri%C3%A7%C3%A3o)
+  * [Tecnologias Utilizadas](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#tecnologias-utilizadas)
 ## Equipe:
   * João Victor de Oliveira Rosa
   * Nicolas Mariano Lima
