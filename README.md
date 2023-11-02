@@ -12,6 +12,7 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
 
 ## Descrição:
   O trabalho abordará o desenvolvimento de um software destinado ao controle e gestão das vendas em um mercado. Essa aplicação oferecerá uma solução completa para gerenciar eficazmente as transações de vendas, bem como os funcionários e os produtos disponíveis. O software permitirá  cadastrar, atualizar, detalhar, repor e remover informações relacionadas às vendas, aos funcionários e aos produtos(estoque).
+  
   Além disso, o software será projetado de forma a atender às necessidades diversificadas de seus usuários. Cada usuário terá seu próprio nível de acesso e permissões, o que significa que diferentes tipos de usuários poderão acessar funcionalidades específicas de acordo com suas responsabilidades. Esse sistema de permissões garantirá não apenas a segurança dos dados, mas também a confidencialidade das informações, assegurando uma gestão segura e eficiente.
 
 ## Tecnologias Utilizadas:
