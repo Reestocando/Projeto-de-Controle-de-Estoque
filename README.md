@@ -23,8 +23,8 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
     <td>Banco de Dados</td>
   </tr>
   <tr>
-    <td>Java </td>
-    <td>HTML, CSS, JS</td>
+    <td>JavaScript</td>
+    <td>HTML, CSS</td>
     <td>PostgreeSQL</td>
   </tr>
 </table>
