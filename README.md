@@ -30,3 +30,16 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
     <td>ElephantSQL v14</td>
   </tr>
 </table>
+
+## Regra de Commit:
+  Ao realizar o commit, o título deve descrever o conteúdo e as alterações feitas utilizando linguagem imperativa.
+
+## Regra de Branch:
+  Antes de qualquer alteração na branch deve ser verificado se está atualizada.
+
+## Pasta de Documentos:
+  Os documentos do projeto estão na pasta "Padrões Adotados"
+
+## Pasta de Códigos:
+  Os códigos do projeto estão na pasta "BackEnd"
+
