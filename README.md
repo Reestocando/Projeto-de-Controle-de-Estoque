@@ -21,10 +21,12 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
     <td>Backend</td>
     <td>Frontend</td>
     <td>Banco de Dados</td>
+    <td>Servidor BD</td>
   </tr>
   <tr>
-    <td>JavaScript</td>
-    <td>HTML, CSS</td>
-    <td>PostgreeSQL</td>
+    <td>JavaScript v20.9</td>
+    <td>HTML v5, CSS v3</td>
+    <td>PostgreeSQL v14</td>
+    <td>ElephantSQL v14</td>
   </tr>
 </table>

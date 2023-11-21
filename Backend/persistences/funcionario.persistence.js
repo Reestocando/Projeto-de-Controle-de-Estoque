@@ -62,7 +62,7 @@ async function getUmFuncionario(cpf){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("select * from cliente where cpf=$1", [cpf]);
+        var query = await conn.query("select * from funcionario where cpf=$1", [cpf]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){
@@ -81,7 +81,7 @@ async function excluiFuncionario(cpf){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("delete from cliente where cpf=$1 returning *", [cpf]);
+        var query = await conn.query("delete from funcionario where cpf=$1 returning *", [cpf]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){

@@ -8,7 +8,7 @@ const app = express()
 app.use(express.json())
 
 // configura o nome da pasta onde os arquivos estáticos estarão
-app.use(express.static('public'))
+app.use(express.static('FrontEnd'))
 
 // faz o Parser dos pacotes recebidos
 app.use(bodyParser.urlencoded({extended:true}))
