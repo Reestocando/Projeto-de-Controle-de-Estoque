@@ -1,0 +1,12 @@
+Routes:     chama o controller
+
+Controler:  recebe os dados
+            valida os dados 
+            retorna resposta
+            chamar services
+
+Services:   regras de negocio
+            chamar persistencia
+
+Persistence:    conexão
+                operações do BD

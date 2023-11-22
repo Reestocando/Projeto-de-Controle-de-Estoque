@@ -21,10 +21,25 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
     <td>Backend</td>
     <td>Frontend</td>
     <td>Banco de Dados</td>
+    <td>Servidor BD</td>
   </tr>
   <tr>
-    <td>Java </td>
-    <td>HTML, CSS, JS</td>
-    <td>PostgreeSQL</td>
+    <td>JavaScript v20.9</td>
+    <td>HTML v5, CSS v3</td>
+    <td>PostgreeSQL v14</td>
+    <td>ElephantSQL v14</td>
   </tr>
 </table>
+
+## Regra de Commit:
+  Ao realizar o commit, o título deve descrever o conteúdo e as alterações feitas utilizando linguagem imperativa.
+
+## Regra de Branch:
+  Antes de qualquer alteração na branch deve ser verificado se está atualizada.
+
+## Pasta de Documentos:
+  Os documentos do projeto estão na pasta "Padrões Adotados"
+
+## Pasta de Códigos:
+  Os códigos do projeto estão na pasta "BackEnd"
+

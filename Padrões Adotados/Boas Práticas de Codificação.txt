@@ -1,0 +1,6 @@
+1- Identar código
+2- Nomear Variáveis de maneira intuitiva
+3- Nomear funções de maneira intuitiva
+4- Comentar código
+5- Padronizar nome de constantes
+6-Percorrer loops somente se necessões que o algoritmo de warshall.
