@@ -10,37 +10,37 @@ async function  getTodosProdutos(req, res){
 }
 
 async function cadastraProduto(req, res){
-    const cpf = req.body.cpf
-    const nome = req.body.nome
-    const cargo = req.body.cargo
-    const salario = req.body.salario
-    const endereco = req.body.endereco
-    const admissao = req.body.admissao
+    const codBarras = req.body.cpf
+    const nomeProd = req.body.nome
+    const qtdEstoque = req.body.cargo
+    const custo = req.body.salario
+    const preco = req.body.endereco
+    const fornecedor = req.body.admissao
 
-    const resultado = await estoqueServices.cadastraProduto(cpf, nome, cargo, salario, endereco, admissao)
+    const resultado = await estoqueServices.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor)
 
     res.send(resultado)
 }
 
 async function getUmProduto(req, res){
     //captura o dado
-    const cpf = req.params.cpf
+    const codBarras = req.params.codBarras
 
     //valida o dado
-    if (cpfValido(cpf)){
+    if (codBarrasValido(codBarras)){
         //chamar camada de serviços
-        const resultado = await estoqueServices.getUmProduto(cpf)
+        const resultado = await estoqueServices.getUmProduto(codBarras)
         res.send(resultado)
     }
     
 }
 
 async function excluiProduto(req, res){
-    const cpf = req.params.cpf
+    const codBarras = req.params.codBarras
 
-    if (cpfValido(cpf)){
+    if (codBarrasValido(codBarras)){
         //chamar camada de serviços
-        const resultado = await estoqueServices.excluiProduto(cpf)
+        const resultado = await estoqueServices.excluiProduto(codBarras)
         res.send(resultado)
     }
     
@@ -48,20 +48,33 @@ async function excluiProduto(req, res){
 
 // criar uma verificação para escolher qual campo alterar (desde q não seja CPF)
 async function alterarProduto(req, res){
-    const cpf = req.params.cpf
-    const nome = req.body.nome
-    const cargo = req.body.cargo
-    const salario = req.body.salario
-    const endereco = req.body.endereco
-    const admissao = req.body.admissao
+    const codBarras = req.params.codBarras
+    const nomeProd = req.body.nomeProd
+    const qtdEstoque = req.body.qtdEstoque
+    const custo = req.body.custo
+    const preco = req.body.preco
+    const fornecedor = req.body.fornecedor
 
-    const resultado = await estoqueServices.alterarProduto(cpf, nome, cargo, salario, endereco, admissao)
+    const resultado = await estoqueServices.alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor)
 
     res.send(resultado)
 }
 
-function codBarrasValido(cpf){
-    return true
+async function reporEstoque(req, res){
+    const codBarras = req.params.codBarras
+    const qtdEstoque = req.body.qtdEstoque
+
+    const resultado = await estoqueServices.reporEstoque(codBarras, qtdEstoque)
+
+    res.send(resultado)
 }
 
-export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto}
+function codBarrasValido(codBarras){
+    const numeroDeCaracteresEsperados = 13;
+
+    const codigoLimpo = codBarras.trim();
+
+    return codigoLimpo.length === numeroDeCaracteresEsperados && !isNaN(codigoLimpo);
+}
+
+export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}

@@ -8,31 +8,37 @@ async function  getTodosProdutos(){
 }
 
 //Função para cadastrar um funcionário
-async function  cadastraProduto(cpf, nome, cargo, salario, endereco, admissao){
+async function  cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
     //chamar camada de persistencia
-    var resultado = await estoquePersistence.cadastraProduto(cpf, nome, cargo, salario, endereco, admissao);
+    var resultado = await estoquePersistence.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor);
 
     return resultado
 }
 
 // Função de alterar um funcionário(cpf não pode ser alterado)
-async function alterarProduto(cpf, nome, cargo, salario, endereco, admissao){
+async function alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
     //chamar camada de persistencia
-    var resultado = await estoquePersistence.alterarProduto(cpf, nome, cargo, salario, endereco, admissao);
+    var resultado = await estoquePersistence.alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor);
 
     return resultado
 }
 
 // Função para excluir um funcionário
-async function excluiProduto(cpf){
+async function excluiProduto(codBarras){
     //chamar camada de persistencia
-    return await estoquePersistence.excluiProduto(cpf)
+    return await estoquePersistence.excluiProduto(codBarras)
 }
 
 // Função para procurar um unico funcionário por seu CPF
-async function getUmProduto(cpf){
+async function getUmProduto(codBarras){
     //chamar camada de persistencia
-    return await estoquePersistence.getUmProduto(cpf)
+    return await estoquePersistence.getUmProduto(codBarras)
 }
 
-export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto}
+async function reporEstoque(codBarras, qtdEstoque){
+
+    var resultado = await estoquePersistence.reporEstoque(codBarras, qtdEstoque);
+    return resultado
+}
+
+export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}

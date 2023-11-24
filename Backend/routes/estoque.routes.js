@@ -5,9 +5,10 @@ const router = express.Router()
 
 //para pegar um produto no banco de dados por exemplo, utilize o /:variavel
 router.get('', estoqueController.getTodosProdutos )
-router.get('/:cpf', estoqueController.getUmProduto)
+router.get('/:codBarras', estoqueController.getUmProduto)
 router.post('', estoqueController.cadastraProduto )
-router.delete('/:cpf', estoqueController.excluiProduto)
-router.put('/:cpf', estoqueController.alterarProduto)
+router.delete('/:codBarras', estoqueController.excluiProduto)
+router.put('/:codBarras', estoqueController.alterarProduto)
+router.put('/:codBarras', estoqueController.reporEstoque)
 
 export default router;
