@@ -60,8 +60,12 @@ async function alterarFuncionario(req, res){
     res.send(resultado)
 }
 
-function cpfValido(cpf){
-    return true
+function codBarrasValido(cpf){
+    const numeroDeCaracteresEsperados = 11;
+
+    const cpfLimpo = cpf.trim();
+
+    return cpfLimpo.length === numeroDeCaracteresEsperados && !isNaN(cpfLimpo);
 }
 
 export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario}
