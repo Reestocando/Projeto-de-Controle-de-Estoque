@@ -1,6 +1,7 @@
 import express from'express'
 import bodyParser from 'body-parser'
 import funcionarioRouter from './routes/funcionario.routes.js'
+import estoqueRouter from './routes/estoque.routes.js'
 
 const app = express()
 
@@ -15,6 +16,9 @@ app.use(bodyParser.urlencoded({extended:true}))
 
 // utiliza o router da pasta funcionario
 app.use("/funcionario", funcionarioRouter)
+
+// utiliza o router da pasta estoque
+app.use("/estoque", estoqueRouter)
 
 app.listen(3000, mensagemServidor)
 
