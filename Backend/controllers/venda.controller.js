@@ -11,13 +11,12 @@ async function  getTodasVendas(req, res){
 
 async function realizaVenda(req, res){
 
-    const moment = require('moment')
     const idVenda = req.body.idVenda
     const cpfVendedor = req.body.cpfVendedor
     const nomeCliente = req.body.nomeCliente
     const codProduto = req.body.codProduto
     const formaPagto = req.body.formaPagto
-    const dataHoraAtualMoment = moment().format('YYYY-MM-DD HH:mm:ss');
+    const dataHoraAtualMoment = CURRENT_TIMESTAMP;
 
     const resultado = await vendaServices.realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment)
 
