@@ -10,12 +10,12 @@ async function  getTodosProdutos(req, res){
 }
 
 async function cadastraProduto(req, res){
-    const codBarras = req.body.cpf
-    const nomeProd = req.body.nome
-    const qtdEstoque = req.body.cargo
-    const custo = req.body.salario
-    const preco = req.body.endereco
-    const fornecedor = req.body.admissao
+    const codBarras = req.body.codBarras
+    const nomeProd = req.body.nomeProd
+    const qtdEstoque = req.body.qtdEstoque
+    const custo = req.body.custo
+    const preco = req.body.preco
+    const fornecedor = req.body.fornecedor
 
     const resultado = await estoqueServices.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor)
 
