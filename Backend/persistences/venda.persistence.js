@@ -19,13 +19,13 @@ async function getTodasVendas(){
     return resultado
 }
 
-async function realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, dataAtual, horaAtual){
+async function realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment){
 
     var resultado = null;
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("insert into estoque (idVenda, cpfVendedor, nomeCliente, codProduto, dataAtual, horaAtual) values ($1, $2, $3, $4, $5, $6) returning *", [idVenda, cpfVendedor, nomeCliente, codProduto, dataAtual, horaAtual]);
+        var query = await conn.query("insert into estoque (idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment) values ($1, $2, $3, $4, $5) returning *", [idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){

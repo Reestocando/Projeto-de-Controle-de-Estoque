@@ -1,8 +1,9 @@
 CREATE TABLE funcionario(
-    cpf varchar(11) PRIMARY KEY NOT NULL,
-    nome varchar(50) NOT NULL,
-    cargo varchar(25) NOT NULL,
-    salario numeric(10,2) NOT NULL,
-    endereco varchar(200) NOT NULL,
+    idVenda numeric(10, 0) PRIMARY KEY NOT NULL,
+    cpfVendedor varchar(11) NOT NULL,
+    nomeCliente varchar(50) NOT NULL,
+    codProduto varchar(13) NOT NULL,
+    formaPagto varchar(25) NOT NULL,
+    dataAtual date,
     admissao date NOT NULL
 );
