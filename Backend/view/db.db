@@ -1,9 +1,8 @@
-CREATE TABLE funcionario(
+CREATE TABLE venda(
     idVenda numeric(10, 0) PRIMARY KEY NOT NULL,
     cpfVendedor varchar(11) NOT NULL,
     nomeCliente varchar(50) NOT NULL,
     codProduto varchar(13) NOT NULL,
     formaPagto varchar(25) NOT NULL,
-    dataAtual date,
-    admissao date NOT NULL
+    dataHoraAtual datetime
 );

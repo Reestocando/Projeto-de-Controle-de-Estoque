@@ -50,12 +50,11 @@ async function excluiProduto(req, res){
 async function alterarProduto(req, res){
     const codBarras = req.params.codBarras
     const nomeProd = req.body.nomeProd
-    const qtdEstoque = req.body.qtdEstoque
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
 
-    const resultado = await estoqueServices.alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor)
+    const resultado = await estoqueServices.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor)
 
     res.send(resultado)
 }

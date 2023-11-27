@@ -16,9 +16,9 @@ async function  cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, f
 }
 
 // Função de alterar um funcionário(cpf não pode ser alterado)
-async function alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
+async function alterarProduto(codBarras, nomeProd, custo, preco, fornecedor){
     //chamar camada de persistencia
-    var resultado = await estoquePersistence.alterarProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor);
+    var resultado = await estoquePersistence.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor);
 
     return resultado
 }
