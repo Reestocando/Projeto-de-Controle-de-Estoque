@@ -11,14 +11,24 @@ async function  getTodasVendas(req, res){
 
 async function realizaVenda(req, res){
 
-    const moment = require('moment');
+    const dataHoraAtual = new Date();
+
+    // Obter componentes da data e hora
+    const ano = dataHoraAtual.getFullYear();
+    const mes = String(dataHoraAtual.getMonth() + 1).padStart(2, '0');
+    const dia = String(dataHoraAtual.getDate()).padStart(2, '0');
+    const hora = String(dataHoraAtual.getHours()).padStart(2, '0');
+    const minutos = String(dataHoraAtual.getMinutes()).padStart(2, '0');
+    const segundos = String(dataHoraAtual.getSeconds()).padStart(2, '0');
+
+    // Formatar a data e hora no formato desejado
+    const dataHoraAtualMoment = `${ano}-${mes}-${dia} ${hora}:${minutos}:${segundos}`;
 
     const idVenda = req.body.idVenda
     const cpfVendedor = req.body.cpfVendedor
     const nomeCliente = req.body.nomeCliente
     const codProduto = req.body.codProduto
     const formaPagto = req.body.formaPagto
-    const dataHoraAtualMoment = moment().format('YYYY-MM-DD HH:mm:ss');
 
     const resultado = await vendaServices.realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment)
 
