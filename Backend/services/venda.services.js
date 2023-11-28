@@ -8,9 +8,9 @@ async function  getTodasVendas(){
 }
 
 //Função para cadastrar um funcionário
-async function  realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment){
+async function  realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda){
     //chamar camada de persistencia
-    var resultado = await vendaPersistence.realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment);
+    var resultado = await vendaPersistence.realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda);
 
     return resultado
 }

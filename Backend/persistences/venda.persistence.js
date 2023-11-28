@@ -7,7 +7,7 @@ async function getTodasVendas(){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataAtual, v.horaAtual, f.nome AS nomeVendedor, e.nome AS nomeProduto FROM vendas v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras");
+        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras");
         console.log(query.rows)
         resultado = query.rows
     } catch(err){
@@ -19,13 +19,13 @@ async function getTodasVendas(){
     return resultado
 }
 
-async function realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment){
+async function realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda){
 
     var resultado = null;
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("insert into estoque (idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment) values ($1, $2, $3, $4, $5) returning *", [idVenda, cpfVendedor, nomeCliente, codProduto, dataHoraAtualMoment]);
+        var query = await conn.query("insert into venda (cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda) values ($1, $2, $3, $4, $5) returning *", [cpfVendedor, nomeCliente, codProduto,formaPagto, dataVenda]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){
@@ -62,7 +62,7 @@ async function getUmaVenda(idVenda){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataAtual, v.horaAtual, f.nome AS nomeVendedor, e.nome AS nomeProduto FROM vendas v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras where idVenda=$1", [idVenda]);
+        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras where idVenda=$1", [idVenda]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){
@@ -74,7 +74,7 @@ async function getUmaVenda(idVenda){
     return resultado
 }
 
-async function cancelarVenda(idVenda){
+async function cancelaVenda(idVenda){
     //conectar no BD
     //executar operação SQL
     var resultado = null;
@@ -93,4 +93,4 @@ async function cancelarVenda(idVenda){
     return resultado
 }
 
-export default { getTodasVendas, getUmaVenda, realizaVenda, cancelarVenda, alterarVenda}
+export default { getTodasVendas, getUmaVenda, realizaVenda, cancelaVenda, alterarVenda}
