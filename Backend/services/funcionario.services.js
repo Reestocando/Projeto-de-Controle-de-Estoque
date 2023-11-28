@@ -35,4 +35,20 @@ async function getUmFuncionario(cpf){
     return await funcionarioPersistence.getUmFuncionario(cpf)
 }
 
-export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario}
+async function verificarExistenciaCPF(cpf){
+    const existeFuncionario = await funcionarioPersistence.verificarExistenciaCPF(cpf);
+    return existeFuncionario;
+}
+
+function validarCPF(cpf){
+    const regex = /^\d{11}$/;
+    return regex.test(cpf);
+}
+
+function validarData(admissao){
+    // Verificar se a data é uma string não vazia e é uma data válida
+  const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+  return dateRegex.test(admissao);
+}
+
+export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario, validarCPF, validarData, verificarExistenciaCPF}

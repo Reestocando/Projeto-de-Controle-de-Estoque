@@ -93,4 +93,15 @@ async function excluiFuncionario(cpf){
     return resultado
 }
 
-export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario}
+async function verificarExistenciaCPF(cpf){
+    const conn = await BD.conectar();
+    try {
+        const query = await conn.query('SELECT COUNT(*) AS count FROM funcionario WHERE cpf = $1', [cpf]);
+        const quantidade = query.rows.length > 0 ? query.rows[0].count : 0;
+        return quantidade > 0;
+    } finally {
+        conn.release();
+    }
+}
+
+export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario, verificarExistenciaCPF}
