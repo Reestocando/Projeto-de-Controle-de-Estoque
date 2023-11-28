@@ -41,4 +41,14 @@ async function reporEstoque(codBarras, qtdEstoque){
     return resultado
 }
 
-export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}
+async function verificarExistenciaCodBarras(codBarras){
+    const existeProduto = await estoquePersistence.verificarExistenciaCodBarras(codBarras);
+    return existeProduto;
+}
+
+function validarCodBarras(codBarras){
+    const regex = /^\d{13}$/;
+    return regex.test(codBarras);
+}
+
+export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras, validarCodBarras}

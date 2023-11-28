@@ -111,4 +111,15 @@ async function reporEstoque(codBarras, qtdEstoque){
     return resultado
 }
 
-export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}
+async function verificarExistenciaCodBarras(codBarras){
+    const conn = await BD.conectar();
+    try {
+        const query = await conn.query('SELECT COUNT(*) AS count FROM estoque WHERE codBarras = $1', [codBarras]);
+        const quantidade = query.rows.length > 0 ? query.rows[0].count : 0;
+        return quantidade > 0;
+    } finally {
+        conn.release();
+    }
+}
+
+export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras}
