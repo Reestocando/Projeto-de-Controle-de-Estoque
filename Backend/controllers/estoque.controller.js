@@ -45,11 +45,15 @@ async function getUmProduto(req, res){
 
     //valida o dado
     if(estoqueServices.validarCodBarras(codBarras)) {
-        try {
-            const resultado = await estoqueServices.getUmProduto(codBarras)
-            res.send(resultado)
-        } catch (error) {
-            res.status(500).json({mensagem: 'Este produto nao foi encontrado!'})
+        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+            try {
+                const resultado = await estoqueServices.getUmProduto(codBarras)
+                res.send(resultado)
+            } catch (error) {
+                res.status(500).json({mensagem: 'Erro ao procurar produto!'})
+            }
+        } else {
+            res.status(400).json({mensagem: 'Produto não encontrado!'})
         }
     } else {
         res.status(400).json({mensagem: 'Codigo de barras invalido! Por favor insira um codigo de barras com 13 digitos numericos'})
@@ -61,11 +65,15 @@ async function excluiProduto(req, res){
 
     //valida o dado
     if(estoqueServices.validarCodBarras(codBarras)) {
-        try {
-            await estoqueServices.excluiProduto(codBarras)
-            res.status(200).json({mensagem: 'Produto removido com sucesso!'})
-        } catch (error) {
-            res.status(500).json({mensagem: 'Este produto nao foi encontrado!'})
+        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+            try {
+                await estoqueServices.excluiProduto(codBarras)
+                res.status(200).json({mensagem: 'Produto removido com sucesso!'})
+            } catch (error) {
+                res.status(500).json({mensagem: 'Erro ao excluir o produto!'})
+            }
+        } else {
+            res.status(400).json({mensagem: 'Produto não encontrado!'})
         }
     } else {
         res.status(400).json({mensagem: 'Codigo de barras invalido! Por favor insira um codigo de barras com 13 digitos numericos'})
@@ -81,16 +89,20 @@ async function alterarProduto(req, res){
     const fornecedor = req.body.fornecedor
 
     if (estoqueServices.validarCodBarras(codBarras)) {
-        if (!nomeProd || !fornecedor || custo===null || preco===null){
-            res.status(400).json({mensagem: 'Todos os atributos (nome do produto, fornecedor, quantidade em estoque, custo e preço) são obrigatorios e não podem ser nulos!'})
-        } else {
-            try {
-                await estoqueServices.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor)
-                res.status(200).json({mensagem: 'Produto alterado com sucesso!'})
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({mensagem: 'Erro ao alterar o produto!'})
+        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+            if (!nomeProd || !fornecedor || custo===null || preco===null){
+                res.status(400).json({mensagem: 'Todos os atributos (nome do produto, fornecedor, quantidade em estoque, custo e preço) são obrigatorios e não podem ser nulos!'})
+            } else {
+                try {
+                    await estoqueServices.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor)
+                    res.status(200).json({mensagem: 'Produto alterado com sucesso!'})
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({mensagem: 'Erro ao alterar o produto!'})
+                }
             }
+        } else {
+            res.status(400).json({mensagem: 'Produto não encontrado!'})
         }
     } else {
         res.status(400).json({mensagem: 'Codigo de barras invalido! Por favor insira um codigo de barras com 13 digitos numericos'})
@@ -102,28 +114,24 @@ async function reporEstoque(req, res){
     const qtdEstoque = req.body.qtdEstoque
 
     if (estoqueServices.validarCodBarras(codBarras)) {
-        if (qtdEstoque===null){
-            res.status(400).json({mensagem: 'A quantidade em estoque é obrigatoria e não podem ser nula!'})
-        } else {
-            try {
-                await estoqueServices.reporEstoque(codBarras, qtdEstoque)
-                res.status(200).json({mensagem: 'Reposição de estoque realizada com sucesso!'})
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({mensagem: 'Erro ao repor o produto!'})
+        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+            if (qtdEstoque===null){
+                res.status(400).json({mensagem: 'A quantidade em estoque é obrigatoria e não podem ser nula!'})
+            } else {
+                try {
+                    await estoqueServices.reporEstoque(codBarras, qtdEstoque)
+                    res.status(200).json({mensagem: 'Reposição de estoque realizada com sucesso!'})
+                } catch (error) {
+                    console.error(error);
+                    res.status(500).json({mensagem: 'Erro ao repor o produto!'})
+                }
             }
+        } else {
+            res.status(400).json({mensagem: 'Produto não encontrado!'})
         }
     } else {
         res.status(400).json({mensagem: 'Codigo de barras invalido! Por favor insira um codigo de barras com 13 digitos numericos'})
     }
-}
-
-function codBarrasValido(codBarras){
-    const numeroDeCaracteresEsperados = 13;
-
-    const codigoLimpo = codBarras.trim();
-
-    return codigoLimpo.length === numeroDeCaracteresEsperados && !isNaN(codigoLimpo);
 }
 
 export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}
