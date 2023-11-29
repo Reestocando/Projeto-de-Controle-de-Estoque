@@ -1,8 +1,7 @@
 import BD from './BD.js'
 
+//Conecta e executa uma operação SQL relacionada a listar todos os produtos
 async function getTodosProdutos(){
-    //conectar no BD
-    //executar operação SQL
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -19,6 +18,7 @@ async function getTodosProdutos(){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a cadastrar um produto
 async function cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
 
     var resultado = null;
@@ -37,6 +37,7 @@ async function cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fo
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a alterar um produto
 async function alterarProduto(codBarras, nomeProd, custo, preco, fornecedor){
 
     var resultado = null;
@@ -55,6 +56,7 @@ async function alterarProduto(codBarras, nomeProd, custo, preco, fornecedor){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a listar um produto
 async function getUmProduto(codBarras){
     //conectar no BD
     //executar operação SQL
@@ -74,6 +76,7 @@ async function getUmProduto(codBarras){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a excluir um produto
 async function excluiProduto(codBarras){
     //conectar no BD
     //executar operação SQL
@@ -93,6 +96,7 @@ async function excluiProduto(codBarras){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a repor um produto no estoque
 async function reporEstoque(codBarras, qtdEstoque){
 
     var resultado = null;
@@ -111,4 +115,16 @@ async function reporEstoque(codBarras, qtdEstoque){
     return resultado
 }
 
-export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque}
+//Conecta e executa uma operação SQL relacionada a fazer uma contagem de quantos produtos existem com determinado codigo de barras
+async function verificarExistenciaCodBarras(codBarras){
+    const conn = await BD.conectar();
+    try {
+        const query = await conn.query('SELECT COUNT(*) AS count FROM estoque WHERE codBarras = $1', [codBarras]);
+        const quantidade = query.rows.length > 0 ? query.rows[0].count : 0;
+        return quantidade > 0;
+    } finally {
+        conn.release();
+    }
+}
+
+export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras}

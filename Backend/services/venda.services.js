@@ -1,37 +1,30 @@
 import vendaPersistence from "../persistences/venda.persistence.js"
 
-// Função para pegar uma lista com todos funcionários
+// Regra de negocio e chamada da persistencia relacionada a listagem de todas as vendas
 async function  getTodasVendas(){
-    //regra de negócio
-    //chamar camada de persistencia
     return await vendaPersistence.getTodasVendas()
 }
 
-//Função para cadastrar um funcionário
-async function  realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment){
-    //chamar camada de persistencia
-    var resultado = await vendaPersistence.realizaVenda(idVenda, cpfVendedor, nomeCliente, codProduto, formaPagto, dataHoraAtualMoment);
-
+// Regra de negocio e chamada da persistencia relacionada ao cadastro de uma venda
+async function  realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda){
+    var resultado = await vendaPersistence.realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda);
     return resultado
 }
 
-// Função de alterar um funcionário(cpf não pode ser alterado)
+// Regra de negocio e chamada da persistencia relacionada a alterar uma venda
 async function alterarVenda(idVenda, nomeCliente, formaPagto){
-    //chamar camada de persistencia
     var resultado = await vendaPersistence.alterarVenda(idVenda, nomeCliente, formaPagto);
 
     return resultado
 }
 
-// Função para excluir um funcionário
+// Regra de negocio e chamada da persistencia relacionada a cancelar uma venda
 async function cancelaVenda(idVenda){
-    //chamar camada de persistencia
     return await vendaPersistence.cancelaVenda(idVenda)
 }
 
-// Função para procurar um unico funcionário por seu CPF
+// Regra de negocio e chamada da persistencia relacionada a listar uma venda
 async function getUmaVenda(idVenda){
-    //chamar camada de persistencia
     return await vendaPersistence.getUmaVenda(idVenda)
 }
 
