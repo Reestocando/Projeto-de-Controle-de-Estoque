@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="logo.png" alt="" width="150" height="60" loading="eager">
+        </div>
+        <input type="text" placeholder="Usuário">
+        <input type="password" placeholder="Senha">
+        <button type="submit">Entrar</button>
+        <div class="links"> 
+            <a href="#" id="forgotPasswordLink" onclick="openModal('forgotPasswordModal')">Esqueceu a senha?</a>
+            <br>
+            <a href="#" id="createAccountLink" onclick="openModal('createAccountModal')">Criar Conta</a>
+        </div>
+    </div>  
+
+
+    <!-- Janela flutuante para Recuperar Senha (modal) -->
+    <div class="modal" id="forgotPasswordModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('forgotPasswordModal')">&times;</span>
+            <h2>Recuperar Senha</h2>
+            <p>Insira seu email para recuperar sua senha:</p>
+            <form onsubmit="recoverPassword(); return false;">
+                <input type="email" placeholder="Seu Email" required>
+                <button type="submit">Recuperar Senha</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Janela flutuante para Criar Conta (modal) -->
+    <div class="modal" id="createAccountModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('createAccountModal')">&times;</span>
+            <h2>Criar Conta</h2>
+            <form onsubmit="createAccount(); return false;">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Senha" required>
+                <input type="password" placeholder="Repetir Senha" required>
+                <select name="profileType" required>
+                    <option value="" disabled selected>Selecione o Tipo de Perfil</option>
+                    <option value="estoque">Administrador de Estoque</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="rh">Gerente de RH</option>
+                </select>
+                <button type="submit">Criar Conta</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Janela flutuante para Registrar Usuário (modal) -->
+    <div class="modal" id="registerUserModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('registerUserModal')">&times;</span>
+            <h2>Registrar Usuário</h2>
+            <form onsubmit="registerUser(); return false;">
+                <input type="text" placeholder="Nome" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Senha" required>
+                <input type="password" placeholder="Repetir Senha" required>
+                <button type="submit">Registrar Usuário</button>
+            </form>
+        </div>
+    </div>
+    
+      <script src="login.js"> </script>
+</body>
+</html>
