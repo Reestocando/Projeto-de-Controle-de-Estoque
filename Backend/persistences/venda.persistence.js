@@ -1,8 +1,7 @@
 import BD from './BD.js'
 
+//Conecta e executa uma operação SQL relacionada a listar todas as vendas
 async function getTodasVendas(){
-    //conectar no BD
-    //executar operação SQL
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -15,12 +14,11 @@ async function getTodasVendas(){
     } finally{
         conn.release()
     }
-
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a cadastrar uma venda
 async function realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda){
-
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -33,12 +31,11 @@ async function realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, da
     } finally{
         conn.release()
     }
-
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a alterar uma venda
 async function alterarVenda(idVenda, nomeCliente, formaPagto){
-
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -51,13 +48,11 @@ async function alterarVenda(idVenda, nomeCliente, formaPagto){
     } finally{
         conn.release()
     }
-
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a listar uma venda
 async function getUmaVenda(idVenda){
-    //conectar no BD
-    //executar operação SQL
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -70,13 +65,11 @@ async function getUmaVenda(idVenda){
     } finally{
         conn.release()
     }
-
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a cancelar uma venda
 async function cancelaVenda(idVenda){
-    //conectar no BD
-    //executar operação SQL
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -89,7 +82,6 @@ async function cancelaVenda(idVenda){
     } finally{
         conn.release()
     }
-
     return resultado
 }
 

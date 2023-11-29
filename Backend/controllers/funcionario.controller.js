@@ -1,11 +1,12 @@
 import funcionarioServices from '../services/funcionario.services.js'
 
+// Captura e valida os dados, e chama o service relacionado a listagem de todos os funcionarios
 async function  getTodosFuncionarios(req, res){
-
     const resultado = await funcionarioServices.getTodosFuncionarios()
     res.send(JSON.stringify(resultado))
 }
 
+// Captura e valida os dados, e chama o service relacionado a cadastrar um funcionario
 async function cadastraFuncionario(req, res){
     const cpf = req.body.cpf
     const nome = req.body.nome
@@ -37,11 +38,10 @@ async function cadastraFuncionario(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a listar um funcionario selecionado por seu cpf cadastrado no banco de dados
 async function getUmFuncionario(req, res){
-    //captura o dado
     const cpf = req.params.cpf
 
-    // valida os dados
     if (funcionarioServices.validarCPF(cpf)) {
         if(await funcionarioServices.verificarExistenciaCPF(cpf)){
             try {
@@ -57,13 +57,12 @@ async function getUmFuncionario(req, res){
     } else {
         res.status(400).json({mensagem: 'CPF invalido! Por favor insira um CPF com 11 digitos numericos'})
     }
-
 }
 
+// Captura e valida os dados, e chama o service relacionado a excluir um funcionario selecionado por seu cpf cadastrado no banco de dados
 async function excluiFuncionario(req, res){
     const cpf = req.params.cpf
 
-    // valida os dados
     if (funcionarioServices.validarCPF(cpf)) {
         if(await funcionarioServices.verificarExistenciaCPF(cpf)){
             try {
@@ -79,10 +78,9 @@ async function excluiFuncionario(req, res){
     } else {
         res.status(400).json({mensagem: 'CPF invalido! Por favor insira um CPF com 11 digitos numericos'})
     }
-    
 }
 
-// criar uma verificação para escolher qual campo alterar (desde q não seja CPF)
+// Captura e valida os dados, e chama o service relacionado a alterar um funcionario selecionado por seu cpf cadastrado no banco de dados
 async function alterarFuncionario(req, res){
     const cpf = req.params.cpf
     const nome = req.body.nome
@@ -91,7 +89,6 @@ async function alterarFuncionario(req, res){
     const endereco = req.body.endereco
     const admissao = req.body.admissao
 
-    // valida os dados
     if (funcionarioServices.validarCPF(cpf)) {
         if(await funcionarioServices.verificarExistenciaCPF(cpf)){
             if (!nome || !cargo || !endereco || !funcionarioServices.validarData(admissao) || salario === null){
@@ -111,7 +108,6 @@ async function alterarFuncionario(req, res){
     } else {
         res.status(400).json({mensagem: 'CPF invalido! Por favor insira um CPF com 11 digitos numericos'})
     }
-
 }
 
 export default { getTodosFuncionarios, cadastraFuncionario, getUmFuncionario, excluiFuncionario, alterarFuncionario}

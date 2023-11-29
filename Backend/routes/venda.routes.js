@@ -3,7 +3,7 @@ import vendaController from '../controllers/venda.controller.js'
 // definidor de rotas(roteador)
 const router = express.Router()
 
-//para pegar um produto no banco de dados por exemplo, utilize o /:variavel
+//Configura a rota de cada função de vendas
 router.get('', vendaController.getTodasVendas)
 router.get('/:idVenda', vendaController.getUmaVenda)
 router.post('', vendaController.realizaVenda)

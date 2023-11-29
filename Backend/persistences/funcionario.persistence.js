@@ -1,5 +1,6 @@
 import BD from './BD.js'
 
+//Conecta e executa uma operação SQL relacionada a listar todos os funcionarios
 async function getTodosFuncionarios(){
     //conectar no BD
     //executar operação SQL
@@ -19,8 +20,8 @@ async function getTodosFuncionarios(){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a cadastrar um funcionario
 async function cadastraFuncionario(cpf, nome, cargo, salario, endereco, admissao){
-
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -37,8 +38,8 @@ async function cadastraFuncionario(cpf, nome, cargo, salario, endereco, admissao
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a alterar um funcionario por seu cpf
 async function alterarFuncionario(cpf, nome, cargo, salario, endereco, admissao){
-
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -55,9 +56,8 @@ async function alterarFuncionario(cpf, nome, cargo, salario, endereco, admissao)
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a listar um funcionario por seu cpf
 async function getUmFuncionario(cpf){
-    //conectar no BD
-    //executar operação SQL
     var resultado = null;
     const conn = await BD.conectar();
 
@@ -74,6 +74,7 @@ async function getUmFuncionario(cpf){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a excluir um funcionario por seu cpf
 async function excluiFuncionario(cpf){
     //conectar no BD
     //executar operação SQL
@@ -93,6 +94,7 @@ async function excluiFuncionario(cpf){
     return resultado
 }
 
+//Conecta e executa uma operação SQL relacionada a contar a quantidade de determinado cpf cadastrado
 async function verificarExistenciaCPF(cpf){
     const conn = await BD.conectar();
     try {

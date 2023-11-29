@@ -2,15 +2,13 @@ import vendaServices from '../services/venda.services.js'
 import funcionarioServices from '../services/funcionario.services.js'
 import estoqueServices from '../services/estoque.services.js'
 
+// Captura e valida os dados, e chama o service relacionado a listagem de todas as vendas
 async function  getTodasVendas(req, res){
-    //capturar os dados
-    //validar os dados
-    //chamar camada de serviços
-    
     const resultado = await vendaServices.getTodasVendas()
     res.send(JSON.stringify(resultado))
 }
 
+// Captura e valida os dados, e chama o service relacionado a cadastrar uma venda
 async function realizaVenda(req, res){
 
     const cpfVendedor = req.body.cpfVendedor
@@ -63,11 +61,11 @@ async function realizaVenda(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a listar uma venda selecionada por seu id cadastrado no banco de dados
 async function getUmaVenda(req, res){
-    //captura o dado
+    
     const idVenda = Number(req.params.idVenda)
 
-    //valida o dado
     if (validarIdVenda(idVenda)){
         try {
             const resultado = await vendaServices.getUmaVenda(idVenda)
@@ -81,10 +79,10 @@ async function getUmaVenda(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a cancelar uma venda selecionada por seu id cadastrado no banco de dados
 async function cancelaVenda(req, res){
     const idVenda = Number(req.params.idVenda)
 
-    //valida o dado
     if (validarIdVenda(idVenda)){
         try {
             await vendaServices.cancelaVenda(idVenda)
@@ -98,13 +96,12 @@ async function cancelaVenda(req, res){
     }
 }
 
-// criar uma verificação para escolher qual campo alterar (desde q não seja CPF)
+// Captura e valida os dados, e chama o service relacionado a alterar uma venda selecionada por seu id cadastrado no banco de dados
 async function alterarVenda(req, res){
     const idVenda = Number(req.params.idVenda)
     const nomeCliente = req.body.nomeCliente
     const formaPagto = req.body.formaPagto
 
-    //valida o dado
     if (validarIdVenda(idVenda)){
         if(!nomeCliente || !formaPagto){
             res.status(400).json({mensagem: 'Todos os atributos são obrigatorios e não podem ser nulos!'})
@@ -122,6 +119,7 @@ async function alterarVenda(req, res){
     }
 }
 
+//Validação do id da venda que pode ser um numero maior que 0 e pode ter até no maximo 10 digitos
 function validarIdVenda(idVenda) {
 
     let isValido = !(idVenda === null || typeof idVenda !== 'number' || idVenda < 1 || idVenda > 9999999999);

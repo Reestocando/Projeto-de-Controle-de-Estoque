@@ -1,51 +1,47 @@
 import estoquePersistence from "../persistences/estoque.persistence.js"
 
-// Função para pegar uma lista com todos funcionários
+// Regra de negocio e chamada da persistencia relacionada a listagem de todos os produtos
 async function  getTodosProdutos(){
-    //regra de negócio
-    //chamar camada de persistencia
     return await estoquePersistence.getTodosProdutos()
 }
 
-//Função para cadastrar um funcionário
+// Regra de negocio e chamada da persistencia relacionada ao cadastro de um produto
 async function  cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
-    //chamar camada de persistencia
     var resultado = await estoquePersistence.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor);
-
     return resultado
 }
 
-// Função de alterar um funcionário(cpf não pode ser alterado)
+// Regra de negocio e chamada da persistencia relacionada a alterar um produto
 async function alterarProduto(codBarras, nomeProd, custo, preco, fornecedor){
-    //chamar camada de persistencia
     var resultado = await estoquePersistence.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor);
-
     return resultado
 }
 
-// Função para excluir um funcionário
+// Regra de negocio e chamada da persistencia relacionada a excluir um produto
 async function excluiProduto(codBarras){
-    //chamar camada de persistencia
     return await estoquePersistence.excluiProduto(codBarras)
 }
 
-// Função para procurar um unico funcionário por seu CPF
+// Regra de negocio e chamada da persistencia relacionada a listar um produto
 async function getUmProduto(codBarras){
     //chamar camada de persistencia
     return await estoquePersistence.getUmProduto(codBarras)
 }
 
+// Regra de negocio e chamada da persistencia relacionada a repor um produto no estoque
 async function reporEstoque(codBarras, qtdEstoque){
 
     var resultado = await estoquePersistence.reporEstoque(codBarras, qtdEstoque);
     return resultado
 }
 
+// Regra de negocio e chamada da persistencia relacionada a verificar a existencia de um produto com determinado codigo de barras
 async function verificarExistenciaCodBarras(codBarras){
     const existeProduto = await estoquePersistence.verificarExistenciaCodBarras(codBarras);
     return existeProduto;
 }
 
+// Regra de negocio sobre como deve ser formatado um codigo de barras
 function validarCodBarras(codBarras){
     const regex = /^\d{13}$/;
     return regex.test(codBarras);

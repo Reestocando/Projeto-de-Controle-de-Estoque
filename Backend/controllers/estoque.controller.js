@@ -1,14 +1,12 @@
 import estoqueServices from '../services/estoque.services.js'
 
+// Captura e valida os dados, e chama o service relacionado a listagem de todos os produtos
 async function  getTodosProdutos(req, res){
-    //capturar os dados
-    //validar os dados
-    //chamar camada de serviços
-    
     const resultado = await estoqueServices.getTodosProdutos()
     res.send(JSON.stringify(resultado))
 }
 
+// Captura e valida os dados, e chama o service relacionado a cadastrar um produto
 async function cadastraProduto(req, res){
     const codBarras = req.body.codBarras
     const nomeProd = req.body.nomeProd
@@ -17,7 +15,6 @@ async function cadastraProduto(req, res){
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
 
-    // valida os dados
     if (estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)){
             res.status(400).json({mensagem: 'Este codigo de barras já está cadastrado!'})
@@ -39,11 +36,10 @@ async function cadastraProduto(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a listagem de um produto por seu codigo de barras
 async function getUmProduto(req, res){
-    //captura o dado
     const codBarras = req.params.codBarras
 
-    //valida o dado
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             try {
@@ -60,10 +56,10 @@ async function getUmProduto(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a exclusão de um produto por seu codigo de barras
 async function excluiProduto(req, res){
     const codBarras = req.params.codBarras
 
-    //valida o dado
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             try {
@@ -80,7 +76,7 @@ async function excluiProduto(req, res){
     }    
 }
 
-// criar uma verificação para escolher qual campo alterar (desde q não seja CPF)
+// Captura e valida os dados, e chama o service relacionado a alterar um produto por seu codigo de barras
 async function alterarProduto(req, res){
     const codBarras = req.params.codBarras
     const nomeProd = req.body.nomeProd
@@ -109,6 +105,7 @@ async function alterarProduto(req, res){
     }
 }
 
+// Captura e valida os dados, e chama o service relacionado a reposição de um produto por seu codigo de barras no estoque
 async function reporEstoque(req, res){
     const codBarras = req.params.codBarras
     const qtdEstoque = req.body.qtdEstoque
