@@ -3,4 +3,4 @@
 3- Nomear funções de maneira intuitiva
 4- Comentar código
 5- Padronizar nome de constantes
-6-Percorrer loops somente se necessões que o algoritmo de warshall.
+6-Percorrer loops somente se necessário conforme  o algoritmo de warshall.
