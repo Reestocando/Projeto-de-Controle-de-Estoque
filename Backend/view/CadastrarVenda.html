@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagina de cadastro de funcionario</title>
+    <link rel="stylesheet" href="CadastrarVenda.css">
+</head>
+<body>
+	
+	<header>
+		<i href="">
+			<img src="logo.png" width="120" height="35">
+		</i>
+		<a href="CadastrarFuncionario.html">Cadastrar Funcionario</a>
+		<nav>
+			<a href="">Voltar</a>
+		</nav>
+	</header>
+
+	<form action="http://localhost:3000/venda" method="post">
+	  <label for="idVenda">IdVenda:</label><br>
+	  <input type="text" id="idVenda" name="idVenda" ><br>
+	  
+	  <label for="nomeComprador">nome do comprador:</label><br>
+	  <input type="text" id="nomeComprador" name="nomeComprador"><br>
+	  
+	  <label for="nomeVendedor">nome do vendedor:</label><br>
+	  <input type="text" id="cargo" name="cargo"><br>
+	  
+	  <label for="formaPagamento">Forma de Pagamento:</label><br>
+	  <input type="text" id="formaPagamento" name="formaPagamento"><br>
+	  
+	  <label for="idVendedor">IdVendedor:</label><br>
+	  <input type="text" id="idVendedor" name="idVendedor"><br>
+	 
+	  <b href="#" id="listaDeProdutos" onclick="openmodal(listaDeProdutos)">Produtos</b>
+	  <button type="submit">Enviar</button>
+	  <button type="reset">Limpar</button>
+	</form> 
+
+	<div class="modal" id="listaDeProdutos">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('listaDeProdutos')">&times;</span>
+            <h2>lista de produtos</h2>
+
+			<table>
+				<thead>
+					<tr>
+						<th>codProduto</th>
+						<th>Nome do Produto</th>
+						<th>Valor</th>
+						<th>Quantidade</th>
+					</tr>
+				</thead>
+				<tbody id="employee-list">
+					<!-- Aqui será preenchido dinamicamente com os dados dos funcionários -->
+				</tbody>
+			</table>
+
+        </div>
+    </div>
+</body>
+</html>
+
