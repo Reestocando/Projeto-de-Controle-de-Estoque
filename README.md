@@ -1,5 +1,5 @@
 # Projeto-de-Controle-de-Estoque
-Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavras
+Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavras - UFLA
 
 ## Visão Geral:
   * [Equipe](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#equipe)

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pagina de cadastro de produto</title>
+    <link rel="stylesheet" href="CadastrarFuncionario.css">
+</head>
+<body>
+	
+	<header>
+		<i href="">
+			<img src="logo.png" width="120" height="35">
+		</i>
+		<a href="CadastrarProduto.html">Cadastrar Produto</a>
+		<nav>
+			<a href="">Voltar</a>
+		</nav>
+	</header>
+
+	<form action="http://localhost:3000/produto" method="post">
+	  <label for="nomeProduto">Nome do Produto:</label><br>
+	  <input type="text" id="nomeProduto" name="nomeProduto" ><br>
+	  
+	  <label for="codProduto">Código do Produto:</label><br>
+	  <input type="text" id="codProduto" name="codProduto"><br>
+	  
+	  <label for="qntdProduto">Quantidade :</label><br>
+	  <input type="text" id="qntdProduto" name="qntdProduto"><br>
+	  
+	  <label for="custo">Custo:</label><br>
+	  <input type="text" id="custo" name="custo"><br>
+	  
+	  <label for="preco">Preço:</label><br>
+	  <input type="text" id="preco" name="preco"><br>
+	  
+	  <label for="lote">Lote:</label><br>
+	  <input type="text" id="lote" name="lote"><br><br>
+
+      <label for="fornecedor">Fornecedor:</label><br>
+	  <input type="text" id="fornecedor" name="fornecedor"><br><br>
+
+	  <button type="submit">Cadastrar</button>
+	  <button type="reset">Limpar</button>
+	</form> 
+</body>
+</html>
+
