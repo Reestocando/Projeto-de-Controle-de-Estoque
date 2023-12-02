@@ -13,17 +13,20 @@
 			<img src="logo.png" width="120" height="35">
 		</i>
 		<nav>
-			<a href="">Voltar</a>
+			<a href="MenuProduto.html">Menu</a>
 		</nav>
 	</header>
 
-    <div class="form-container">
-        <h1>Alterar Produto</h1>
-        <label for="codigoProduto">Codigo do produto:</label>
-        <input type="text" id="codigoProduto" placeholder="Digite o código do produto">
-        <button onclick="alterarProduto()">Buscar</button>
-        <p id="result-message"></p>
-    </div>
+    <form action="http://localhost:3000/produto/:idvenda" method="put">
+
+        <label for="codProduto">Codigo do produto:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
+
+        <label for="idVenda">ID da venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
+        
+        <button type="submit">Buscar</button>
+      </form> 
 </body>
 </html>
 
