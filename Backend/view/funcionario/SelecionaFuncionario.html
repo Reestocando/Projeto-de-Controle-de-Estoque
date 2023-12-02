@@ -4,7 +4,7 @@
     <meta charset="utf-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de selecionar funcionario</title>
-    <link rel="stylesheet" href="AlteraFuncionario.css">
+    <link rel="stylesheet" href="SelecionaFuncionario.css">
 </head>
 <body>
 	
@@ -18,11 +18,10 @@
 	</header>
 
 	<form action="http://localhost:3000/funcionario/:cpf" method="get">
-        <label for="cpf">cpf:</label><br>
+        <label for="cpf">CPF do funcionario:</label><br>
         <input type="text" id="cpf" name="cpf" ><br>
 
-        <button type="submit">Enviar</button>
-        <button type="reset">Limpar</button>
+        <button type="submit">Buscar</button>
       </form> 
 </body>
 </html>

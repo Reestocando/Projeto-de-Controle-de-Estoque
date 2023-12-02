@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de cadastro de funcionario</title>
     <link rel="stylesheet" href="CadastrarVenda.css">
 </head>
@@ -32,32 +34,13 @@
 	  <label for="idVendedor">IdVendedor:</label><br>
 	  <input type="text" id="idVendedor" name="idVendedor"><br>
 	 
-	  <b href="#" id="listaDeProdutos" onclick="openmodal(listaDeProdutos)">Produtos</b>
+	  <label for="codProduto">Código do produto:</label><br>
+	  <input type="text" id="codProduto" name="codProduto"><br>
+	 
 	  <button type="submit">Enviar</button>
 	  <button type="reset">Limpar</button>
 	</form> 
 
-	<div class="modal" id="listaDeProdutos">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('listaDeProdutos')">&times;</span>
-            <h2>lista de produtos</h2>
-
-			<table>
-				<thead>
-					<tr>
-						<th>codProduto</th>
-						<th>Nome do Produto</th>
-						<th>Valor</th>
-						<th>Quantidade</th>
-					</tr>
-				</thead>
-				<tbody id="employee-list">
-					<!-- Aqui será preenchido dinamicamente com os dados dos funcionários -->
-				</tbody>
-			</table>
-
-        </div>
-    </div>
 </body>
 </html>
 

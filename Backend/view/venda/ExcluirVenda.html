@@ -17,12 +17,12 @@
 		</nav>
 	</header>
 
-    <div class="form-container">
-        <h1>Excluir Venda</h1>
-        <label for="idVenda">Codigo do Venda:</label>
-        <input type="text" id="idVenda" placeholder="Digite o codigo da venda">
-        <button onclick="excluirVenda()">Excluir</button>
-        <p id="result-message"></p>
-    </div>
+    <form action="http://localhost:3000/venda/:idvenda" method="delete">
+
+        <label for="idVenda">ID da venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
+
+        <button type="submit">Excluir</button>
+    </form> 
 </body>
 </html>

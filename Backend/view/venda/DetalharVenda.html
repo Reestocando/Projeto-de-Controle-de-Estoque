@@ -17,13 +17,13 @@
 		</nav>
 	</header>
 
-    <div class="form-container">
-        <h1>Detalhar Venda</h1>
-        <label for="codProduto">Detalhar Venda:</label>
-        <input type="text" id="idVenda" placeholder="Digite o codigo da venda">
-        <button onclick="DetalharVenda()">Buscar</button>
-        <p id="result-message"></p>
-    </div>
+    <form action="http://localhost:3000/venda/:idvenda" method="get">
+
+        <label for="idVenda">ID da venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
+       
+        <button type="submit">Buscar</button>
+      </form> 
 </body>
 </html>
 

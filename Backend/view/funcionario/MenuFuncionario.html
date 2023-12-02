@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menu do Funcionario</title>
     <link rel="stylesheet" href="MenuFuncionario.css">
 </head>
@@ -15,35 +17,11 @@
     
     
     <div class="menu-container">
-        <button onclick="openModal('cadastrarModal')">Cadastrar Funcionário</button>
-        <button onclick="openModal('alterarModal')">Alterar Funcionário</button>
-        <button onclick="openModal('detalharModal')">Detalhar Funcionário</button>
-        <button onclick="openModal('excluirModal')">Excluir Funcionário</button>
+        <a href="#"><button>Cadastrar Funcionário</button></a>
+        <a href="#"><button>Alterar Funcionário</button></a>
+        <a href="#"><button>Detalhar Funcionário</button></a>
+        <a href="#"><button>Excluir Funcionário</button></a>
     </div>
 
-    <div id="cadastrarModal" class="modal">
-        <h1>Cadastrar Funcionário</h1>
-        <!-- Formulário de cadastro aqui -->
-        <button onclick="closeModal('cadastrarModal')">Fechar</button>
-    </div>
-
-    <div id="alterarModal" class="modal">
-        <h1>Alterar Funcionário</h1>
-        <!-- Formulário de alteração aqui -->
-        <button onclick="closeModal('alterarModal')">Fechar</button>
-    </div>
-
-    <div id="detalharModal" class="modal">
-        <h1>Detalhar Funcionário</h1>
-        <!-- Detalhes do funcionário aqui -->
-        <button onclick="closeModal('detalharModal')">Fechar</button>
-    </div>
-
-    <div id="excluirModal" class="modal">
-        <h1>Excluir Funcionário</h1>
-        <p>Tem certeza de que deseja excluir o funcionário?</p>
-        <button onclick="confirmExclusion(); closeModal('excluirModal')">Confirmar Exclusão</button>
-        <button onclick="closeModal('excluirModal')">Cancelar</button>
-    </div>
 </body>
 </html>
