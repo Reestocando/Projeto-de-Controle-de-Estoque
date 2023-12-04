@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de alterar venda</title>
+    <link rel="stylesheet" href="AlteraVenda.css">
+</head>
+<body>
+	
+	<header>
+		<i href="">
+			<img src="logo.png" width="120" height="35">
+		</i>
+		<nav>
+			<a href="MenuVenda.html">Menu</a>
+		</nav>  
+	</header>
+
+    <form action="http://localhost:3000/venda/:idvenda" method="put">
+
+        <label for="idVenda">ID da venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
+        
+        <button onclick="redirecionarParaExcluir()">Excluir</button>
+        <button type="redirecionarParaAlterar()">Alterar</button>
+        <button type="redirecionarParaDetalhar()">Detalhar</button>
+        
+      </form> 
+      <script>
+        function redirecionarParaAlterar() {
+          var cpf = prompt("Digite o id do venda:");
+          window.location.href = "/:" + idVenda; // Substitua "/alterar/" pela sua rota de alteração
+        }
+    
+        function redirecionarParaExcluir() {
+          var cpf = prompt("Digite o id da vanda:");
+          window.location.href = "/:" + idVenda; // Substitua "/excluir/" pela sua rota de exclusão
+        }
+        function redirecionarParaDetalhar() {
+            var cpf = prompt("Digite o id do venda:");
+            window.location.href = "/:" + idVenda; // Substitua "/excluir/" pela sua rota de exclusão
+          }
+      </script>
+</body>
+</html>
+
+    

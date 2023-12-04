@@ -29,23 +29,45 @@ header a{
     text-decoration: none;
 }
 
-.table-container {
+form{
     text-align: center;
-    margin-top: 20px;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #04063d;
-}
-
-th {
+    max-width: 500px;
+    max-height: 150px;
     background-color: #D9D9D9;
-    color: #090FA1;
+    padding: 20px;
+    border-radius: 8px;
+    position: absolute;
+        top: 37%;
+        left: 35%;
+        width: 50%;
+        height: 50%;      
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #090FA1;
+    color: #D9D9D9;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgb(0, 0, 0);
+}
+
+button:hover {
+    background-color: #D9D9D9;
+}
+
+#result-message {
+    margin-top: 10px;
+    color: #D9D9D9;
 }
