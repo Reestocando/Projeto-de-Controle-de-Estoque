@@ -6,6 +6,13 @@ import vendaRouter from './routes/venda.routes.js'
 
 const app = express()
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*'); // ou especifique a origem do seu aplicativo
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // converte o objeto request no formato JSON
 app.use(express.json())
 
