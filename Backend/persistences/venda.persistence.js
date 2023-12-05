@@ -6,7 +6,7 @@ async function getTodasVendas(){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.formaPagto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras");
+        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras");
         console.log(query.rows)
         resultado = query.rows
     } catch(err){
@@ -57,7 +57,7 @@ async function getUmaVenda(idVenda){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.formaPagto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras where idVenda=$1", [idVenda]);
+        var query = await conn.query("SELECT v.idVenda, v.cpfVendedor, v.nomeCliente, v.codProduto, v.dataVenda, f.nome AS nomeVendedor, e.nomeProd AS nomeProduto FROM venda v JOIN funcionario f ON v.cpfVendedor = f.cpf JOIN estoque e ON v.codProduto = e.codBarras where idVenda=$1", [idVenda]);
         console.log(query.rows)
         resultado = query.rows
     } catch(err){

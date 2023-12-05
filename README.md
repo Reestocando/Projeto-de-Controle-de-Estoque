@@ -6,9 +6,9 @@ Trabalho da disciplina de Engenharia de Software da Universidade Federal de Lavr
   * [Descrição](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#descri%C3%A7%C3%A3o)
   * [Tecnologias Utilizadas](https://github.com/Reestocando/Projeto-de-Controle-de-Estoque#tecnologias-utilizadas)
 ## Equipe:
-  * João Victor de Oliveira Rosa - FrontEnd
-  * Nicolas Mariano Lima - P.O
-  * Pedro Agnaldo Zacarias Amancio - BackEnd
+  * João Victor de Oliveira Rosa
+  * Nicolas Mariano Lima
+  * Pedro Agnaldo Zacarias Amancio
 
 ## Descrição:
   O trabalho abordará o desenvolvimento de um software destinado ao controle e gestão das vendas em um mercado. Essa aplicação oferecerá uma solução completa para gerenciar eficazmente as transações de vendas, bem como os funcionários e os produtos disponíveis. O software permitirá  cadastrar, atualizar, detalhar, repor e remover informações relacionadas às vendas, aos funcionários e aos produtos(estoque).

@@ -1,206 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de alterar venda</title>
-    <link rel="stylesheet" href="AlteraVenda.css" />
-  </head>
-  <style>
-    .detalhar {
-      padding-top: 410px;
-    }
-  </style>
-  <body>
-    <header>
-      <i href="">
-        <img src="logo.png" width="120" height="35" />
-      </i>
-      <nav>
-        <a href="MenuVenda.html">Menu</a>
-      </nav>
-    </header>
+    <link rel="stylesheet" href="AlteraVenda.css">
+</head>
+<body>
+	
+	<header>
+		<i href="">
+			<img src="logo.png" width="120" height="35">
+		</i>
+		<nav>
+			<a href="MenuVenda.html">Menu</a>
+		</nav>  
+	</header>
+    <form action="http://localhost:3000/venda" method="get">
 
-    <form id="myForm">
-      <label for="idVenda">ID da venda:</label><br />
-      <input type="text" id="idVenda" name="idVenda" /><br />
-
-      <button type="button" onclick="redirecionarParaExcluir()">Excluir</button>
-      <button type="button" onclick="redirecionarParaAlterar()">Alterar</button>
-      <button type="button" onclick="redirecionarParaDetalhar()">
-        Detalhar
-      </button>
-    </form>
-    <div id="detalhar" class="detalhar"></div>
-    <div id="alterarDiv" style="display: none">
-      <h2>Alterar Venda</h2>
-      <form id="alterarForm">
-        <!-- Os campos do formulário serão preenchidos dinamicamente -->
-        <button type="button" onclick="cancelarAlteracao()">Cancelar</button>
-        <button type="button" onclick="confirmarAlteracao()">
-          Confirmar Alteração
-        </button>
-        <button type="button" onclick="excluirVenda()">Excluir</button>
-      </form>
-    </div>
-    <script>
-      function redirecionarParaAlterar() {
-        var idVenda = document.getElementById("idVenda").value;
-        fetchData("http://localhost:3000/venda/" + idVenda, 0);
-      }
-
-      function redirecionarParaExcluir() {
-        var idVenda = document.getElementById("idVenda").value;
-        fetchData("http://localhost:3000/venda/" + idVenda, 1);
-      }
-
-      function redirecionarParaDetalhar() {
-        var idVenda = document.getElementById("idVenda").value;
-        fetchData("http://localhost:3000/venda/" + idVenda, 2);
-      }
-
-      function fetchData(url, metodo) {
-        fetch(url)
-          .then((response) => response.json())
-          .then((data) => {
-            if (metodo == 0) {
-              data.forEach((item) => {
-                document.getElementById("alterarDiv").style.display = "block";
-                preencherCamposAlterar(item);
-              });
-            }
-            if (metodo == 2) {
-              var divDetalhar = document.getElementById("detalhar");
-              divDetalhar.innerHTML = "";
-              data.forEach((item) => {
-                divDetalhar.innerHTML += `
-                            <p>ID da Venda: ${item.idvenda}</p>
-                            <p>CPF do Vendedor: ${item.cpfvendedor}</p>
-                            <p>Nome do Cliente: ${item.nomecliente}</p>
-                            <p>Forma de Pagamento: ${item.formapagto}</p>
-                            <p>Código do Produto: ${item.codproduto}</p>
-                            <p>Data da Venda: ${item.datavenda}</p>
-                            <p>Nome do Vendedor: ${item.nomevendedor}</p>
-                            <p>Nome do Produto: ${item.nomeproduto}</p>
-                            <hr>
-                        `;
-              });
-            }
-          })
-          .catch((error) => console.error("Erro:", error));
-      }
-
-      function preencherCamposAlterar(data) {
-        // Obtém os campos do formulário de alteração
-        var form = document.getElementById("alterarForm");
-    
-        // Limpa os campos existentes no formulário
-        form.innerHTML = "";
-    
-        // Cria inputs apenas para os campos desejados
-        var camposDesejados = ["nomecliente", "formapagto"];
-    
-        camposDesejados.forEach(function (key) {
-            var label = document.createElement("label");
-            label.textContent = formatarNomeCampo(key);
-            form.appendChild(label);
-    
-            var input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("name", key);
-            input.setAttribute("placeholder", key);
-            input.value = data[key] || ""; // Use o valor existente ou uma string vazia se não existir
-            form.appendChild(input);
-        });
-    
-        // Adiciona os botões "Cancelar" e "Confirmar Alteração"
-        var buttonCancelar = document.createElement("button");
-        buttonCancelar.setAttribute("type", "button");
-        buttonCancelar.textContent = "Cancelar";
-        buttonCancelar.onclick = cancelarAlteracao;
-        form.appendChild(buttonCancelar);
-    
-        var buttonConfirmar = document.createElement("button");
-        buttonConfirmar.setAttribute("type", "button");
-        buttonConfirmar.textContent = "Confirmar Alteração";
-        buttonConfirmar.onclick = confirmarAlteracao;
-        form.appendChild(buttonConfirmar);
-    }
-
-      function cancelarAlteracao() {
-        // Esconde a div de alteração ao clicar em "Cancelar"
-        document.getElementById("alterarDiv").style.display = "none";
-        // Limpa os campos do formulário de alteração
-        document.getElementById("alterarForm").innerHTML = "";
-      }
-
-      function confirmarAlteracao() {
-        // Obtém os campos do formulário de alteração
-        var form = document.getElementById("alterarForm");
-
-        // Cria um objeto para armazenar os dados a serem enviados
-        var formData = {};
+        <label for="idVenda">ID da venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda"><br>
         
-        // Preenche o objeto com os valores dos campos do formulário
-        for (var i = 0; i < form.elements.length; i++) {
-          var element = form.elements[i];
-          if (element.type !== "button") {
-            formData[element.name] = element.value;
-          }
-        }
-
-        // Obtém o ID da venda a ser alterada (você pode pegar de onde quiser)
-        var idVenda = document.getElementById("idVenda").value;
-
-        // Monta a URL com o ID da venda
-        var url = "http://localhost:3000/venda/" + idVenda;
-
-        // Envia os dados para o servidor usando o método PUT
-        fetch(url, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Alteração confirmada:', data);
-          // Aqui você pode realizar ações adicionais após a confirmação da alteração
-        })
-        .catch(error => console.error('Erro ao confirmar alteração:', error));
-
-        // Esconde a div de alteração e limpa os campos
-        cancelarAlteracao();
-      }
-
-      function excluirVenda() {
-        // Obtém o ID da venda a ser excluída
-        var idVenda = document.getElementById("idVenda").value;
-    
-        // Exibe um modal de confirmação
-        var confirmacao = confirm("Tem certeza que deseja excluir esta venda?");
-    
-        if (confirmacao) {
-            // Monta a URL com o ID da venda
-            var url = "http://localhost:3000/venda/" + idVenda;
-    
-            // Envia uma solicitação DELETE para excluir a venda
-            fetch(url, {
-                method: 'DELETE'
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Venda excluída:', data);
-                // Aqui você pode realizar ações adicionais após a exclusão
-                alert('Venda excluída com sucesso!');
-            })
-            .catch(error => {
-                console.error('Erro ao excluir venda:', error);
-                alert('Erro ao excluir venda. Verifique o console para mais detalhes.');
+        <button onclick="redirecionarParaExcluir()">Excluir</button>
+        <button onclick="redirecionarParaAlterar()">Alterar</button>
+        <button onclick="redirecionarParaDetalhar()">Detalhar</button>
+        
+    </form> 
+    <script>
+        function redirecionarParaAlterar() {
+            var idVenda = document.getElementById("idVenda").value;
+            fetch("/alterar/" + idVenda, {
+                method: 'PUT',
+            }).then(response => {
+                // Trate a resposta se necessário
+                console.log(response);
+            }).catch(error => {
+                console.error('Erro ao alterar:', error);
             });
         }
-    }
+
+        function redirecionarParaExcluir() {
+            var idVenda = document.getElementById("idVenda").value;
+            fetch("/excluir/" + idVenda, {
+                method: 'DELETE',
+            }).then(response => {
+                // Trate a resposta se necessário
+                console.log(response);
+            }).catch(error => {
+                console.error('Erro ao excluir:', error);
+            });
+        }
+
+        function redirecionarParaDetalhar() {
+            var idVenda = document.getElementById("idVenda").value;
+            fetch("http://localhost:3000/venda/detalhar/" + idVenda, {
+                method: 'GET',
+            }).then(response => {
+                // Trate a resposta se necessário
+                console.log(response);
+            }).catch(error => {
+                console.error('Erro ao excluir:', error);
+            });
+        }
+        
     </script>
-  </body>
+</body>
 </html>
+
+    
