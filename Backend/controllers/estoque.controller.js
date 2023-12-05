@@ -8,22 +8,22 @@ async function  getTodosProdutos(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a cadastrar um produto
 async function cadastraProduto(req, res){
-    const codBarras = req.body.codBarras
-    const nomeProd = req.body.nomeProd
-    const qtdEstoque = req.body.qtdEstoque
+    const codbarras = req.body.codbarras
+    const nomeprod = req.body.nomeprod
+    const qtdestoque = req.body.qtdestoque
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
 
-    if (estoqueServices.validarCodBarras(codBarras)) {
-        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)){
+    if (estoqueServices.validarCodBarras(codbarras)) {
+        if(await estoqueServices.verificarExistenciaCodBarras(codbarras)){
             res.status(400).json({mensagem: 'Este codigo de barras já está cadastrado!'})
         } else {
-            if (!nomeProd || !fornecedor || qtdEstoque===null || custo===null || preco===null){
+            if (!nomeprod || !fornecedor || qtdestoque===null || custo===null || preco===null){
                 res.status(400).json({mensagem: 'Todos os atributos (nome do produto, fornecedor, quantidade em estoque, custo e preço) são obrigatorios e não podem ser nulos!'})
             } else {
                 try {
-                    await estoqueServices.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor)
+                    await estoqueServices.cadastraProduto(codbarras, nomeprod, qtdestoque, custo, preco, fornecedor)
                     res.status(200).json({mensagem: 'Produto cadastrado com sucesso!'})
                 } catch (error) {
                     console.error(error);
@@ -38,12 +38,12 @@ async function cadastraProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a listagem de um produto por seu codigo de barras
 async function getUmProduto(req, res){
-    const codBarras = req.params.codBarras
+    const codbarras = req.params.codbarras
 
-    if(estoqueServices.validarCodBarras(codBarras)) {
-        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+    if(estoqueServices.validarCodBarras(codbarras)) {
+        if(await estoqueServices.verificarExistenciaCodBarras(codbarras)) {
             try {
-                const resultado = await estoqueServices.getUmProduto(codBarras)
+                const resultado = await estoqueServices.getUmProduto(codbarras)
                 res.send(resultado)
             } catch (error) {
                 res.status(500).json({mensagem: 'Erro ao procurar produto!'})
@@ -58,12 +58,12 @@ async function getUmProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a exclusão de um produto por seu codigo de barras
 async function excluiProduto(req, res){
-    const codBarras = req.params.codBarras
+    const codbarras = req.params.codbarras
 
-    if(estoqueServices.validarCodBarras(codBarras)) {
-        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
+    if(estoqueServices.validarCodBarras(codbarras)) {
+        if(await estoqueServices.verificarExistenciaCodBarras(codbarras)) {
             try {
-                await estoqueServices.excluiProduto(codBarras)
+                await estoqueServices.excluiProduto(codbarras)
                 res.status(200).json({mensagem: 'Produto removido com sucesso!'})
             } catch (error) {
                 res.status(500).json({mensagem: 'Erro ao excluir o produto!'})
@@ -78,19 +78,19 @@ async function excluiProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar um produto por seu codigo de barras
 async function alterarProduto(req, res){
-    const codBarras = req.params.codBarras
-    const nomeProd = req.body.nomeProd
+    const codbarras = req.params.codbarras
+    const nomeprod = req.body.nomeprod
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
 
-    if (estoqueServices.validarCodBarras(codBarras)) {
-        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
-            if (!nomeProd || !fornecedor || custo===null || preco===null){
+    if (estoqueServices.validarCodBarras(codbarras)) {
+        if(await estoqueServices.verificarExistenciaCodBarras(codbarras)) {
+            if (!nomeprod || !fornecedor || custo===null || preco===null){
                 res.status(400).json({mensagem: 'Todos os atributos (nome do produto, fornecedor, quantidade em estoque, custo e preço) são obrigatorios e não podem ser nulos!'})
             } else {
                 try {
-                    await estoqueServices.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor)
+                    await estoqueServices.alterarProduto(codbarras, nomeprod, custo, preco, fornecedor)
                     res.status(200).json({mensagem: 'Produto alterado com sucesso!'})
                 } catch (error) {
                     console.error(error);
@@ -107,16 +107,16 @@ async function alterarProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a reposição de um produto por seu codigo de barras no estoque
 async function reporEstoque(req, res){
-    const codBarras = req.params.codBarras
-    const qtdEstoque = req.body.qtdEstoque
+    const codbarras = req.params.codbarras
+    const qtdestoque = req.body.qtdestoque
 
-    if (estoqueServices.validarCodBarras(codBarras)) {
-        if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
-            if (qtdEstoque===null){
+    if (estoqueServices.validarCodBarras(codbarras)) {
+        if(await estoqueServices.verificarExistenciaCodBarras(codbarras)) {
+            if (qtdestoque===null){
                 res.status(400).json({mensagem: 'A quantidade em estoque é obrigatoria e não podem ser nula!'})
             } else {
                 try {
-                    await estoqueServices.reporEstoque(codBarras, qtdEstoque)
+                    await estoqueServices.reporEstoque(codbarras, qtdestoque)
                     res.status(200).json({mensagem: 'Reposição de estoque realizada com sucesso!'})
                 } catch (error) {
                     console.error(error);

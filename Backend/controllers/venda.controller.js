@@ -11,28 +11,28 @@ async function  getTodasVendas(req, res){
 // Captura e valida os dados, e chama o service relacionado a cadastrar uma venda
 async function realizaVenda(req, res){
 
-    const cpfVendedor = req.body.cpfVendedor
-    const nomeCliente = req.body.nomeCliente
-    const codProduto = req.body.codProduto
-    const formaPagto = req.body.formaPagto
-    const dataVenda = req.body.dataVenda
+    const cpfvendedor = req.body.cpfvendedor
+    const nomecliente = req.body.nomecliente
+    const codproduto = req.body.codproduto
+    const formapagto = req.body.formapagto
+    const datavenda = req.body.datavenda
 
     //Validação de cpf
-    if(funcionarioServices.validarCPF(cpfVendedor)){
+    if(funcionarioServices.validarCPF(cpfvendedor)){
         //Validação de cpf existente na tabela funcionario
-        if(await funcionarioServices.verificarExistenciaCPF(cpfVendedor)){
+        if(await funcionarioServices.verificarExistenciaCPF(cpfvendedor)){
             //Validação de cod de barras
-            if(estoqueServices.validarCodBarras(codProduto)){
+            if(estoqueServices.validarCodBarras(codproduto)){
                 //Validação de cod de barras existente na tabela estoque
-                if(await estoqueServices.verificarExistenciaCodBarras(codProduto)){
+                if(await estoqueServices.verificarExistenciaCodBarras(codproduto)){
                     //Validação de valores nulos
-                    if(!nomeCliente || !formaPagto || !funcionarioServices.validarData(dataVenda)){
+                    if(!nomecliente || !formapagto || !funcionarioServices.validarData(datavenda)){
                         res.status(400).json({mensagem: 'Todos os atributos são obrigatorios e não podem ser nulos!'})
                     } 
                     //Validação de valores nulos
                     else {
                         try {
-                            await vendaServices.realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda)
+                            await vendaServices.realizaVenda(cpfvendedor, nomecliente, codproduto, formapagto, datavenda)
                             res.status(200).json({mensagem: 'Venda Realizada com sucesso!'})
                         } catch (error) {
                             console.error(error);
@@ -64,11 +64,11 @@ async function realizaVenda(req, res){
 // Captura e valida os dados, e chama o service relacionado a listar uma venda selecionada por seu id cadastrado no banco de dados
 async function getUmaVenda(req, res){
     
-    const idVenda = Number(req.params.idVenda)
+    const idvenda = Number(req.params.idvenda)
 
-    if (validarIdVenda(idVenda)){
+    if (validaridvenda(idvenda)){
         try {
-            const resultado = await vendaServices.getUmaVenda(idVenda)
+            const resultado = await vendaServices.getUmaVenda(idvenda)
             res.send(resultado)
         } catch (error) {
             console.error(error);
@@ -81,11 +81,11 @@ async function getUmaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a cancelar uma venda selecionada por seu id cadastrado no banco de dados
 async function cancelaVenda(req, res){
-    const idVenda = Number(req.params.idVenda)
+    const idvenda = Number(req.params.idvenda)
 
-    if (validarIdVenda(idVenda)){
+    if (validaridvenda(idvenda)){
         try {
-            await vendaServices.cancelaVenda(idVenda)
+            await vendaServices.cancelaVenda(idvenda)
             res.status(200).json({mensagem: 'Venda cancelada com sucesso!'})
         } catch (error) {
             console.error(error);
@@ -98,16 +98,16 @@ async function cancelaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar uma venda selecionada por seu id cadastrado no banco de dados
 async function alterarVenda(req, res){
-    const idVenda = Number(req.params.idVenda)
-    const nomeCliente = req.body.nomeCliente
-    const formaPagto = req.body.formaPagto
+    const idvenda = Number(req.params.idvenda)
+    const nomecliente = req.body.nomecliente
+    const formapagto = req.body.formapagto
 
-    if (validarIdVenda(idVenda)){
-        if(!nomeCliente || !formaPagto){
+    if (validaridvenda(idvenda)){
+        if(!nomecliente || !formapagto){
             res.status(400).json({mensagem: 'Todos os atributos são obrigatorios e não podem ser nulos!'})
         } else {
             try {
-                await vendaServices.alterarVenda(idVenda, nomeCliente, formaPagto)
+                await vendaServices.alterarVenda(idvenda, nomecliente, formapagto)
                 res.status(200).json({mensagem: 'Venda alterada com sucesso!'})
             } catch (error) {
                 console.error(error);
@@ -120,9 +120,9 @@ async function alterarVenda(req, res){
 }
 
 //Validação do id da venda que pode ser um numero maior que 0 e pode ter até no maximo 10 digitos
-function validarIdVenda(idVenda) {
+function validaridvenda(idvenda) {
 
-    let isValido = !(idVenda === null || typeof idVenda !== 'number' || idVenda < 1 || idVenda > 9999999999);
+    let isValido = !(idvenda === null || typeof idvenda !== 'number' || idvenda < 1 || idvenda > 9999999999);
     return isValido;
 }
 

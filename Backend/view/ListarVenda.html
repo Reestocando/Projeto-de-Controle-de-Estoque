@@ -17,10 +17,62 @@
 		</nav>
 	</header>
 
-    <form action="http://localhost:3000/estoque" method="get">
-       
-        <button type="submit">Listar</button>
-    </form> 
+    <form action="http://localhost:3000/estoque" method="get" id="listarForm">
+        <button type="button" onclick="listarVendas()">Listar</button>
+    </form>
 
+    <table id="tabelaVendas">
+        <thead>
+            <tr>
+                <th>ID Venda</th>
+                <th>CPF Vendedor</th>
+                <th>Nome Cliente</th>
+                <th>Código Produto</th>
+                <th>Forma Pagamento</th>
+                <th>Data Venda</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Os dados serão adicionados aqui dinamicamente -->
+        </tbody>
+    </table>
+
+    <script>
+        function listarVendas() {
+            var form = document.getElementById('listarForm');
+            var url = form.getAttribute('action');
+
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    exibirDadosNaTabela(data);
+                }
+            };
+
+            xhr.open('GET', url, true);
+            xhr.send();
+        }
+
+        function exibirDadosNaTabela(data) {
+            var tabela = document.getElementById('tabelaVendas');
+            var tbody = tabela.getElementsByTagName('tbody')[0];
+
+            // Limpar tabela antes de adicionar novos dados
+            tbody.innerHTML = '';
+
+            for (var i = 0; i < data.length; i++) {
+                var row = tbody.insertRow(i);
+                var venda = data[i];
+
+                row.insertCell(0).innerHTML = venda.idvenda;
+                row.insertCell(1).innerHTML = venda.cpfvendedor;
+                row.insertCell(2).innerHTML = venda.nomecliente;
+                row.insertCell(3).innerHTML = venda.codproduto;
+                row.insertCell(4).innerHTML = venda.formapagto;
+                row.insertCell(5).innerHTML = venda.datavenda;
+            }
+        }
+    </script>
 </body>
 </html>
