@@ -3,6 +3,7 @@ import bodyParser from 'body-parser'
 import funcionarioRouter from './routes/funcionario.routes.js'
 import estoqueRouter from './routes/estoque.routes.js'
 import vendaRouter from './routes/venda.routes.js'
+import cors from 'cors'
 
 const app = express()
 
@@ -12,6 +13,8 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+app.use(cors())
 
 // converte o objeto request no formato JSON
 app.use(express.json())
