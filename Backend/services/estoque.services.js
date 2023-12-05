@@ -6,45 +6,45 @@ async function  getTodosProdutos(){
 }
 
 // Regra de negocio e chamada da persistencia relacionada ao cadastro de um produto
-async function  cadastraProduto(codbarras, nomeprod, qtdestoque, custo, preco, fornecedor){
-    var resultado = await estoquePersistence.cadastraProduto(codbarras, nomeprod, qtdestoque, custo, preco, fornecedor);
+async function  cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor){
+    var resultado = await estoquePersistence.cadastraProduto(codBarras, nomeProd, qtdEstoque, custo, preco, fornecedor);
     return resultado
 }
 
 // Regra de negocio e chamada da persistencia relacionada a alterar um produto
-async function alterarProduto(codbarras, nomeprod, custo, preco, fornecedor){
-    var resultado = await estoquePersistence.alterarProduto(codbarras, nomeprod, custo, preco, fornecedor);
+async function alterarProduto(codBarras, nomeProd, custo, preco, fornecedor){
+    var resultado = await estoquePersistence.alterarProduto(codBarras, nomeProd, custo, preco, fornecedor);
     return resultado
 }
 
 // Regra de negocio e chamada da persistencia relacionada a excluir um produto
-async function excluiProduto(codbarras){
-    return await estoquePersistence.excluiProduto(codbarras)
+async function excluiProduto(codBarras){
+    return await estoquePersistence.excluiProduto(codBarras)
 }
 
 // Regra de negocio e chamada da persistencia relacionada a listar um produto
-async function getUmProduto(codbarras){
+async function getUmProduto(codBarras){
     //chamar camada de persistencia
-    return await estoquePersistence.getUmProduto(codbarras)
+    return await estoquePersistence.getUmProduto(codBarras)
 }
 
 // Regra de negocio e chamada da persistencia relacionada a repor um produto no estoque
-async function reporEstoque(codbarras, qtdestoque){
+async function reporEstoque(codBarras, qtdEstoque){
 
-    var resultado = await estoquePersistence.reporEstoque(codbarras, qtdestoque);
+    var resultado = await estoquePersistence.reporEstoque(codBarras, qtdEstoque);
     return resultado
 }
 
 // Regra de negocio e chamada da persistencia relacionada a verificar a existencia de um produto com determinado codigo de barras
-async function verificarExistenciaCodBarras(codbarras){
-    const existeProduto = await estoquePersistence.verificarExistenciaCodBarras(codbarras);
+async function verificarExistenciaCodBarras(codBarras){
+    const existeProduto = await estoquePersistence.verificarExistenciaCodBarras(codBarras);
     return existeProduto;
 }
 
 // Regra de negocio sobre como deve ser formatado um codigo de barras
-function validarCodBarras(codbarras){
+function validarCodBarras(codBarras){
     const regex = /^\d{13}$/;
-    return regex.test(codbarras);
+    return regex.test(codBarras);
 }
 
 export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras, validarCodBarras}

@@ -6,26 +6,26 @@ async function  getTodasVendas(){
 }
 
 // Regra de negocio e chamada da persistencia relacionada ao cadastro de uma venda
-async function  realizaVenda(cpfvendedor, nomecliente, codproduto, formapagto, datavenda){
-    var resultado = await vendaPersistence.realizaVenda(cpfvendedor, nomecliente, codproduto, formapagto, datavenda);
+async function  realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda){
+    var resultado = await vendaPersistence.realizaVenda(cpfVendedor, nomeCliente, codProduto, formaPagto, dataVenda);
     return resultado
 }
 
 // Regra de negocio e chamada da persistencia relacionada a alterar uma venda
-async function alterarVenda(idvenda, nomecliente, formapagto){
-    var resultado = await vendaPersistence.alterarVenda(idvenda, nomecliente, formapagto);
+async function alterarVenda(idVenda, nomeCliente, formaPagto){
+    var resultado = await vendaPersistence.alterarVenda(idVenda, nomeCliente, formaPagto);
 
     return resultado
 }
 
 // Regra de negocio e chamada da persistencia relacionada a cancelar uma venda
-async function cancelaVenda(idvenda){
-    return await vendaPersistence.cancelaVenda(idvenda)
+async function cancelaVenda(idVenda){
+    return await vendaPersistence.cancelaVenda(idVenda)
 }
 
 // Regra de negocio e chamada da persistencia relacionada a listar uma venda
-async function getUmaVenda(idvenda){
-    return await vendaPersistence.getUmaVenda(idvenda)
+async function getUmaVenda(idVenda){
+    return await vendaPersistence.getUmaVenda(idVenda)
 }
 
 export default { getTodasVendas, getUmaVenda, realizaVenda, cancelaVenda, alterarVenda}
