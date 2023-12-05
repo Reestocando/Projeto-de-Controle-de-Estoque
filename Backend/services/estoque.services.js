@@ -43,9 +43,8 @@ async function verificarExistenciaCodBarras(codBarras){
 
 // Regra de negocio sobre como deve ser formatado um codigo de barras
 function validarCodBarras(codBarras){
-    const codigoNumerico = codBarras.replace(/\D/g, '');
     const regex = /^\d{13}$/;
-    return regex.test(codigoNumerico);
+    return regex.test(codBarras);
 }
 
 export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras, validarCodBarras}

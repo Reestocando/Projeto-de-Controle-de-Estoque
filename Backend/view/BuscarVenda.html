@@ -16,54 +16,32 @@
 			<a href="MenuVenda.html">Menu</a>
 		</nav>  
 	</header>
-    <form action="http://localhost:3000/venda" method="get">
+
+    <form action="http://localhost:3000/venda/:idvenda" method="put">
 
         <label for="idVenda">ID da venda:</label><br>
         <input type="text" id="idVenda" name="idVenda"><br>
         
         <button onclick="redirecionarParaExcluir()">Excluir</button>
-        <button onclick="redirecionarParaAlterar()">Alterar</button>
-        <button onclick="redirecionarParaDetalhar()">Detalhar</button>
+        <button type="redirecionarParaAlterar()">Alterar</button>
+        <button type="redirecionarParaDetalhar()">Detalhar</button>
         
-    </form> 
-    <script>
+      </form> 
+      <script>
         function redirecionarParaAlterar() {
-            var idVenda = document.getElementById("idVenda").value;
-            fetch("/alterar/" + idVenda, {
-                method: 'PUT',
-            }).then(response => {
-                // Trate a resposta se necessário
-                console.log(response);
-            }).catch(error => {
-                console.error('Erro ao alterar:', error);
-            });
+          var cpf = prompt("Digite o id do venda:");
+          window.location.href = "/:" + idVenda; // Substitua "/alterar/" pela sua rota de alteração
         }
-
+    
         function redirecionarParaExcluir() {
-            var idVenda = document.getElementById("idVenda").value;
-            fetch("/excluir/" + idVenda, {
-                method: 'DELETE',
-            }).then(response => {
-                // Trate a resposta se necessário
-                console.log(response);
-            }).catch(error => {
-                console.error('Erro ao excluir:', error);
-            });
+          var cpf = prompt("Digite o id da vanda:");
+          window.location.href = "/:" + idVenda; // Substitua "/excluir/" pela sua rota de exclusão
         }
-
         function redirecionarParaDetalhar() {
-            var idVenda = document.getElementById("idVenda").value;
-            fetch("http://localhost:3000/venda/detalhar/" + idVenda, {
-                method: 'GET',
-            }).then(response => {
-                // Trate a resposta se necessário
-                console.log(response);
-            }).catch(error => {
-                console.error('Erro ao excluir:', error);
-            });
-        }
-        
-    </script>
+            var cpf = prompt("Digite o id do venda:");
+            window.location.href = "/:" + idVenda; // Substitua "/excluir/" pela sua rota de exclusão
+          }
+      </script>
 </body>
 </html>
 

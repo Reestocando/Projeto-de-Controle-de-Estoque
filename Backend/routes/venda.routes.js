@@ -5,9 +5,9 @@ const router = express.Router()
 
 //Configura a rota de cada função de vendas
 router.get('', vendaController.getTodasVendas)
-router.get('/detalhar/:idVenda', vendaController.getUmaVenda)
+router.get('/:idVenda', vendaController.getUmaVenda)
 router.post('', vendaController.realizaVenda)
-router.delete('/excluir/:idVenda', vendaController.cancelaVenda)
-router.put('/alterar/:idVenda', vendaController.alterarVenda)
+router.delete('/:idVenda', vendaController.cancelaVenda)
+router.put('/:idVenda', vendaController.alterarVenda)
 
 export default router;

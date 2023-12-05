@@ -128,6 +128,3 @@ async function verificarExistenciaCodBarras(codBarras){
 }
 
 export default { getTodosProdutos, getUmProduto, cadastraProduto, excluiProduto, alterarProduto, reporEstoque, verificarExistenciaCodBarras}
-
-//para testes unitarios
-module.exports = { getTodosProdutos, cadastraProduto, excluiProduto };
