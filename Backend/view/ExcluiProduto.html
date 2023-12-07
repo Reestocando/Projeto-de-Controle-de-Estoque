@@ -19,7 +19,7 @@
 
     <script>
         async function deletarProduto() {
-            let cpf = document.getElementById("codbarras").value;
+            let codbarras = document.getElementById("codbarras").value;
             let url = "http://localhost:3000/estoque/" + codbarras
             console.log(url)
             await fetch(url, {

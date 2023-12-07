@@ -17,12 +17,26 @@
 		</nav>
 	</header>
 
-    <form action="http://localhost:3000/venda/:idvenda" method="delete">
+    <script>
+        async function deletarVenda() {
+            let idvenda = document.getElementById("idvenda").value;
+            let url = "http://localhost:3000/venda/" + idvenda
+            console.log(url)
+            await fetch(url, {
+             method: 'DELETE'
+           })
+           .then(res => res.json())
+           .then(data => console.log(data))
+           .catch(error => console.error(error));
+        }
+      </script>
 
-        <label for="idVenda">ID da venda:</label><br>
-        <input type="text" id="idVenda" name="idVenda"><br>
+    <form action="http://localhost:3000/venda/" method="delete">
 
-        <button type="submit">Excluir</button>
-    </form> 
+        <label for="idvenda">Id da venda:</label><br>
+        <input type="text" id="idvenda" name="idvenda"><br>
+        <button onclick="deletarVenda()">Botao excluir</button>
+      </form> 
 </body>
 </html>
+
