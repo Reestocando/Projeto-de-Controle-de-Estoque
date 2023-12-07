@@ -11,11 +11,11 @@ async function  getTodasVendas(req, res){
 // Captura e valida os dados, e chama o service relacionado a cadastrar uma venda
 async function realizaVenda(req, res){
 
-    const cpfVendedor = req.body.cpfVendedor
-    const nomeCliente = req.body.nomeCliente
-    const codProduto = req.body.codProduto
-    const formaPagto = req.body.formaPagto
-    const dataVenda = req.body.dataVenda
+    const cpfVendedor = req.body.cpfvendedor
+    const nomeCliente = req.body.nomecliente
+    const codProduto = req.body.codproduto
+    const formaPagto = req.body.formapagto
+    const dataVenda = req.body.datavenda
 
     //Validação de cpf
     if(funcionarioServices.validarCPF(cpfVendedor)){
@@ -64,7 +64,7 @@ async function realizaVenda(req, res){
 // Captura e valida os dados, e chama o service relacionado a listar uma venda selecionada por seu id cadastrado no banco de dados
 async function getUmaVenda(req, res){
     
-    const idVenda = Number(req.params.idVenda)
+    const idVenda = Number(req.params.idvenda)
 
     if (validarIdVenda(idVenda)){
         try {
@@ -81,7 +81,7 @@ async function getUmaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a cancelar uma venda selecionada por seu id cadastrado no banco de dados
 async function cancelaVenda(req, res){
-    const idVenda = Number(req.params.idVenda)
+    const idVenda = Number(req.params.idvenda)
 
     if (validarIdVenda(idVenda)){
         try {
@@ -98,9 +98,9 @@ async function cancelaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar uma venda selecionada por seu id cadastrado no banco de dados
 async function alterarVenda(req, res){
-    const idVenda = Number(req.params.idVenda)
-    const nomeCliente = req.body.nomeCliente
-    const formaPagto = req.body.formaPagto
+    const idVenda = Number(req.params.idvenda)
+    const nomeCliente = req.body.nomecliente
+    const formaPagto = req.body.formapagto
 
     if (validarIdVenda(idVenda)){
         if(!nomeCliente || !formaPagto){

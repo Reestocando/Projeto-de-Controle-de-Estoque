@@ -8,9 +8,9 @@ async function  getTodosProdutos(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a cadastrar um produto
 async function cadastraProduto(req, res){
-    const codBarras = req.body.codBarras
-    const nomeProd = req.body.nomeProd
-    const qtdEstoque = req.body.qtdEstoque
+    const codBarras = req.body.codbarras
+    const nomeProd = req.body.nomeprod
+    const qtdEstoque = req.body.qtdestoque
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
@@ -38,7 +38,7 @@ async function cadastraProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a listagem de um produto por seu codigo de barras
 async function getUmProduto(req, res){
-    const codBarras = req.params.codBarras
+    const codBarras = req.params.codbarras
 
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
@@ -58,7 +58,7 @@ async function getUmProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a exclusão de um produto por seu codigo de barras
 async function excluiProduto(req, res){
-    const codBarras = req.params.codBarras
+    const codBarras = req.params.codbarras
 
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
@@ -78,8 +78,8 @@ async function excluiProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar um produto por seu codigo de barras
 async function alterarProduto(req, res){
-    const codBarras = req.params.codBarras
-    const nomeProd = req.body.nomeProd
+    const codBarras = req.params.codbarras
+    const nomeProd = req.body.nomeprod
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
@@ -107,8 +107,8 @@ async function alterarProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a reposição de um produto por seu codigo de barras no estoque
 async function reporEstoque(req, res){
-    const codBarras = req.params.codBarras
-    const qtdEstoque = req.body.qtdEstoque
+    const codBarras = req.params.codbarras
+    const qtdEstoque = req.body.qtdestoque
 
     if (estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
