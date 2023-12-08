@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina de cadastro de produto</title>
+    <link rel="stylesheet" href="CadastrarVenda.css">
+</head>
+<body>
+	
+	<header>
+		<i href="">
+			<img src="logo.png" width="120" height="35">
+		</i>
+		<a href="CadastrarVenda.html">Cadastrar Produto</a>
+		<nav>
+			<a href="MenuVenda.html">Menu</a>
+		</nav>
+	</header>
+
+	<form action="http://localhost:3000/estoque" method="post">
+	  <label for="cpfvendedor">Cpf do Vendedor:</label><br>
+	  <input type="text" id="cpfvendedor" name="cpfvendedor" ><br>
+	  
+	  <label for="nomecliente">Nome do Cliente:</label><br>
+	  <input type="text" id="nomecliente" name="nomecliente"><br>
+	  
+	  <label for="codproduto">Codigo de barras do produto:</label><br>
+	  <input type="text" id="codproduto" name="codproduto"><br>
+	  
+	  <label for="formapagto">Forma de Pagamento:</label><br>
+	  <input type="text" id="formapagto" name="formapagto"><br>
+	  
+	  <label for="datavenda">Data da venda:</label><br>
+	  <input type="date" id="datavenda" name="datavenda"><br>
+
+	  <button type="submit">Cadastrar</button>
+	  <button type="reset">Limpar</button>
+	</form> 
+</body>
+</html>
+
