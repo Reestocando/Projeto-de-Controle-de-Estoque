@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de detalhar produto</title>
+    <title>Pagina de detalhar funcionario</title>
     <link rel="stylesheet" href="Detalhar.css">
 </head>
 <body>
@@ -13,17 +13,16 @@
 			<img src="logo.png" width="120" height="35">
 		</i>
 		<nav>
-			<a href="MenuProduto.html">Menu</a>
+			<a href="MenuFuncionario.html">Menu</a>
 		</nav>
 	</header>
 
-    <form action="http://localhost:3000/estoque" method="get">
+	<form action="http://localhost:3000/venda/:idvenda" method="get">
+        <label for="idvenda">CPF do funcionario:</label><br>
+        <input type="text" id="idvenda" name="idvenda" ><br>
 
-        <label for="codBarras">Codigo do produto:</label><br>
-        <input type="text" id="codBarras" name="codBarras"><br>
-       
         <button type="submit">Buscar</button>
-    </form> 
+      </form> 
 </body>
 </html>
 
