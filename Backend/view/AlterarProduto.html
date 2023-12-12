@@ -1,33 +1,122 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pagina de alterar produto</title>
     <link rel="stylesheet" href="Altera.css">
 </head>
+
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuProduto.html">Menu</a>
-		</nav>
-	</header>
 
-    <form action="http://localhost:3000/produto/:idvenda" method="put">
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuProduto.html">Menu</a>
+        </nav>
+    </header>
 
-        <label for="codProduto">Codigo do produto:</label><br>
-        <input type="text" id="idVenda" name="idVenda"><br>
+    <div class="form-container">
+        <h1>Alterar Produto</h1>
+        <label for="codProduto">Código do Produto:</label><br>
+        <input type="text" id="codProduto" name="codProduto">
 
-        <label for="idVenda">ID da venda:</label><br>
-        <input type="text" id="idVenda" name="idVenda"><br>
-        
-        <button type="submit">Buscar</button>
-      </form> 
+        <button type="button" onclick="buscarProduto()">Buscar</button>
+
+        <!-- Formulário para exibir os dados do produto -->
+        <form id="formProduto" style="display: none;">
+            <label for="nomeprod">Nome do Produto:</label>
+            <input type="text" id="nomeprod" name="nomeprod">
+
+            <label for="qtdestoque">Quantidade:</label>
+            <input type="text" id="qtdestoque" name="qtdestoque">
+
+            <label for="custo">Custo:</label>
+            <input type="text" id="custo" name="custo">
+
+            <label for="preco">Preço:</label>
+            <input type="text" id="preco" name="preco">
+
+            <label for="fornecedor">Fornecedor:</label>
+            <input type="text" id="fornecedor" name="fornecedor">
+
+            <button type="button" onclick="enviarModificacoes()">Enviar Modificações</button>
+        </form>
+
+        <p id="result-message"></p>
+    </div>
+
+    <script>
+        function buscarProduto() {
+            const codProduto = document.getElementById('codProduto').value;
+            const formProduto = document.getElementById('formProduto');
+            const resultMessage = document.getElementById('result-message');
+
+            fetch(`http://localhost:3000/estoque/${codProduto}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.error) {
+                        resultMessage.textContent = data.error;
+                        formProduto.style.display = 'none';
+                    } else {
+                        resultMessage.textContent = '';
+                        formProduto.style.display = 'block';
+
+                        // Preencher os campos do formulário
+                        document.getElementById('nomeprod').value = data.nomeprod;
+                        document.getElementById('qtdestoque').value = data.qtdestoque;
+                        document.getElementById('custo').value = data.custo;
+                        document.getElementById('preco').value = data.preco;
+                        document.getElementById('fornecedor').value = data.fornecedor;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao realizar a requisição:', error);
+                    resultMessage.textContent = 'Erro ao conectar ao servidor.';
+                    formProduto.style.display = 'none';
+                });
+        }
+
+        function enviarModificacoes() {
+            const codProduto = document.getElementById('codProduto').value;
+            const nomeprod = document.getElementById('nomeprod').value;
+            const qtdestoque = document.getElementById('qtdestoque').value;
+            const custo = document.getElementById('custo').value;
+            const preco = document.getElementById('preco').value;
+            const fornecedor = document.getElementById('fornecedor').value;
+
+            // Construir objeto com as modificações
+            const modificacoes = {
+                codProduto: document.getElementById('codProduto').value,
+                nomeprod: nomeprod,
+                qtdestoque: qtdestoque,
+                custo: custo,
+                preco: preco,
+                fornecedor: fornecedor
+            };
+            console.log(modificacoes);
+            // Enviar as modificações para o servidor usando o método PUT
+            fetch(`http://localhost:3000/estoque/${codProduto}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(modificacoes),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensagem);
+                })
+                .catch(error => {
+                    console.error('Erro ao realizar a requisição:', error);
+                    alert('Erro ao conectar ao servidor.');
+                });
+        }
+    </script>
 </body>
-</html>
 
-    
+</html>

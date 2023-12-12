@@ -14,7 +14,6 @@ async function cadastraFuncionario(req, res){
     const salario = req.body.salario
     const endereco = req.body.endereco
     const admissao = req.body.admissao
-
     // valida os dados
     if (funcionarioServices.validarCPF(cpf)) {
         if(await funcionarioServices.verificarExistenciaCPF(cpf)){

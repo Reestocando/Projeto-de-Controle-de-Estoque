@@ -1,29 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
+
 <head>
-    <meta charset="utf-8">    
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de detalhar funcionario</title>
+    <title>Página de detalhar venda</title>
     <link rel="stylesheet" href="Detalhar.css">
 </head>
+
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuFuncionario.html">Menu</a>
-		</nav>
-	</header>
 
-	<form action="http://localhost:3000/venda/:idvenda" method="get">
-        <label for="idvenda">CPF do funcionario:</label><br>
-        <input type="text" id="idvenda" name="idvenda" ><br>
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuVenda.html">Menu</a>
+        </nav>
+    </header>
 
-        <button type="submit">Buscar</button>
-      </form> 
+    <div class="form-container">
+        <h1>Detalhes da Venda</h1>
+        <label for="idVenda">ID da Venda:</label>
+        <input type="text" id="idVenda" name="idVenda" placeholder="Digite o ID da Venda"><br>
+
+        <button onclick="buscarVenda()">Buscar</button>
+
+        <div id="detalhesVenda"></div>
+    </div>
+
+    <script>
+        async function buscarVenda() {
+            const idVenda = document.getElementById('idVenda').value;
+            const detalhesVenda = document.getElementById('detalhesVenda');
+
+            try {
+                const response = await fetch(`http://localhost:3000/venda/${idVenda}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    detalhesVenda.innerHTML = `<p>${data.error}</p>`;
+                } else {
+                    detalhesVenda.innerHTML = `
+                        <p><strong>ID da Venda:</strong> ${data.idvenda}</p>
+                        <p><strong>Cpf do Vendedor:</strong> ${data.cpfvendedor}</p>
+                        <p><strong>Nome do Cliente:</strong> ${data.nomecliente}</p>
+                        <p><strong>Código de Barras do Produto:</strong> ${data.codproduto}</p>
+                        <p><strong>Forma de Pagamento:</strong> ${data.formapagto}</p>
+                        <p><strong>Data da Venda:</strong> ${data.datavenda}</p>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+                detalhesVenda.innerHTML = `<p>Erro ao conectar ao servidor.</p>`;
+            }
+        }
+    </script>
 </body>
-</html>
 
-    
+</html>

@@ -1,25 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de listar produto</title>
+    <title>Página de listar produto</title>
     <link rel="stylesheet" href="Listar.css">
 </head>
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuProduto.html">Menu</a>
-		</nav>
-	</header>
-    <form action="http://localhost:3000/estoque" method="get">
-       
-        <button type="submit">Listar</button>
-    </form> 
+    
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuProduto.html">Menu</a>
+        </nav>
+    </header>
 
+    <div class="produtos-lista">
+        <h1>Lista de Produtos</h1>
+        <button onclick="listarProdutos()">Listar</button>
+        <ul id="listaProdutos"></ul>
+    </div>
+
+    <script>
+        async function listarProdutos() {
+            const listaProdutos = document.getElementById('listaProdutos');
+
+            try {
+                const response = await fetch('http://localhost:3000/estoque');
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Limpar a lista
+                    listaProdutos.innerHTML = '';
+
+                    // Adicionar cada produto à lista
+                    data.forEach(produto => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Nome: ${produto.nomeprod}, Código de Barras: ${produto.codbarras}, Quantidade: ${produto.qtdestoque}, Custo: ${produto.custo}, Preço: ${produto.preco}, Fornecedor: ${produto.fornecedor}`;
+                        listaProdutos.appendChild(listItem);
+                    });
+                } else {
+                    console.error(data); // Aqui você pode decidir o que fazer com a resposta de erro
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+            }
+        }
+    </script>
 </body>
 </html>

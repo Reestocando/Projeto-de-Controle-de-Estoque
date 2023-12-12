@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de cadastro de produto</title>
+    <title>Página de cadastro de venda</title>
     <link rel="stylesheet" href="Cadastrar.css">
 </head>
 <body>
@@ -12,31 +12,68 @@
 		<i href="">
 			<img src="logo.png" width="120" height="35">
 		</i>
-		<a href="CadastrarVenda.html">Cadastrar Produto</a>
+		<a href="CadastrarVenda.html">Cadastrar Venda</a>
 		<nav>
 			<a href="MenuVenda.html">Menu</a>
 		</nav>
 	</header>
 
-	<form action="http://localhost:3000/venda" method="post">
-	  <label for="cpfvendedor">Cpf do Vendedor:</label><br>
+	<form id="formulario" method="post">
+	  <label for="cpfvendedor">CPF do Vendedor:</label><br>
 	  <input type="text" id="cpfvendedor" name="cpfvendedor" ><br>
 	  
 	  <label for="nomecliente">Nome do Cliente:</label><br>
 	  <input type="text" id="nomecliente" name="nomecliente"><br>
 	  
-	  <label for="codproduto">Codigo de barras do produto:</label><br>
+	  <label for="codproduto">Código de Barras do Produto:</label><br>
 	  <input type="text" id="codproduto" name="codproduto"><br>
 	  
 	  <label for="formapagto">Forma de Pagamento:</label><br>
 	  <input type="text" id="formapagto" name="formapagto"><br>
 	  
-	  <label for="datavenda">Data da venda:</label><br>
+	  <label for="datavenda">Data da Venda:</label><br>
 	  <input type="date" id="datavenda" name="datavenda"><br>
 
 	  <button type="submit">Cadastrar</button>
 	  <button type="reset">Limpar</button>
-	</form> 
+	</form>
+
+	<script>
+		document.getElementById('formulario').addEventListener('submit', function (event) {
+			event.preventDefault(); // Impede o envio padrão do formulário
+			const cpfvendedor = document.getElementById('cpfvendedor').value;
+			const nomecliente = document.getElementById('nomecliente').value;
+			const codproduto = document.getElementById('codproduto').value;
+			const formapagto = document.getElementById('formapagto').value;
+			const datavenda = document.getElementById('datavenda').value;
+
+			// Construir objeto com os dados da venda
+			const insercao = {
+				cpfvendedor: cpfvendedor,
+				nomecliente: nomecliente,
+				codproduto: codproduto,
+				formapagto: formapagto,
+				datavenda: datavenda
+			};
+
+			// Enviar os dados da venda para o servidor usando o método POST
+			fetch(`http://localhost:3000/venda/`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(insercao),
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				alert(data.mensagem);
+			})
+			.catch(error => {
+				console.error('Erro ao realizar a requisição:', error);
+				alert('Erro ao conectar ao servidor.');
+			});
+		});
+	</script>
 </body>
 </html>
-

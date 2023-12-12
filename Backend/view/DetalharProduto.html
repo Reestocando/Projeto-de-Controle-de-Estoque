@@ -1,30 +1,57 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de detalhar produto</title>
+    <title>Página de detalhar produto</title>
     <link rel="stylesheet" href="Detalhar.css">
 </head>
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuProduto.html">Menu</a>
-		</nav>
-	</header>
+    
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuProduto.html">Menu</a>
+        </nav>
+    </header>
 
-    <form action="http://localhost:3000/estoque" method="get">
+    <div class="form-container" id="">
+        <h1>Detalhes do Produto</h1>
+        <label for="codBarras">Código do Produto:</label>
+        <input type="text" id="codBarras" name="codBarras" placeholder="Digite o Código do Produto"><br>
 
-        <label for="codBarras">Codigo do produto:</label><br>
-        <input type="text" id="codBarras" name="codBarras"><br>
-       
-        <button type="submit">Buscar</button>
-    </form> 
+        <button onclick="buscarProduto()">Buscar</button>
+
+        <div id="detalhesProduto"></div>
+    </div>
+
+    <script>
+        async function buscarProduto() {
+            const codBarras = document.getElementById('codBarras').value;
+            const detalhesProduto = document.getElementById('detalhesProduto');
+
+            try {
+                const response = await fetch(`http://localhost:3000/estoque/${codBarras}`);
+                const data = await response.json();
+
+                if (data.error) {
+                    detalhesProduto.innerHTML = `<p>${data.error}</p>`;
+                } else {
+                    detalhesProduto.innerHTML = `
+                        <p><strong>Nome do Produto:</strong> ${data.nomeprod}</p>
+                        <p><strong>Quantidade:</strong> ${data.qtdestoque}</p>
+                        <p><strong>Custo:</strong> ${data.custo}</p>
+                        <p><strong>Preço:</strong> ${data.preco}</p>
+                        <p><strong>Fornecedor:</strong> ${data.fornecedor}</p>
+                    `;
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+                detalhesProduto.innerHTML = `<p>Erro ao conectar ao servidor.</p>`;
+            }
+        }
+    </script>
 </body>
 </html>
-
-    

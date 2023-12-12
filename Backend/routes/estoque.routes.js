@@ -8,7 +8,7 @@ router.get('', estoqueController.getTodosProdutos )
 router.get('/:codBarras', estoqueController.getUmProduto)
 router.post('', estoqueController.cadastraProduto )
 router.delete('/:codBarras', estoqueController.excluiProduto)
-router.put('/alterar/:codBarras', estoqueController.alterarProduto)
+router.put('/:codBarras', estoqueController.alterarProduto)
 router.put('/repor/:codBarras', estoqueController.reporEstoque)
 
 export default router;

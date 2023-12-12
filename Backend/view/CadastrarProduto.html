@@ -18,7 +18,7 @@
 		</nav>
 	</header>
 
-	<form action="http://localhost:3000/estoque" method="post">
+	<form id="formulario" method="post">
 	  <label for="nomeprod">Nome do Produto:</label><br>
 	  <input type="text" id="nomeprod" name="nomeprod" ><br>
 	  
@@ -39,7 +39,46 @@
 
 	  <button type="submit">Cadastrar</button>
 	  <button type="reset">Limpar</button>
-	</form> 
+	</form>
+
+	<script>
+		document.getElementById('formulario').addEventListener('submit', function (event) {
+			event.preventDefault(); // Impede o envio padrão do formulário
+			const nomeprod = document.getElementById('nomeprod').value;
+			const codbarras = document.getElementById('codbarras').value;
+			const qtdestoque = document.getElementById('qtdestoque').value;
+			const custo = document.getElementById('custo').value;
+			const preco = document.getElementById('preco').value;
+			const fornecedor = document.getElementById('fornecedor').value;
+
+			// Construir objeto com as modificações
+			const insercao = {
+				nomeprod: nomeprod,
+				codbarras: codbarras,
+				qtdestoque: qtdestoque,
+				custo: custo,
+				preco: preco,
+				fornecedor: fornecedor
+			};
+
+			// Enviar as modificações para o servidor usando o método POST
+			fetch(`http://localhost:3000/estoque/`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(insercao),
+			})
+			.then(response => response.json())
+			.then(data => {
+				console.log(data);
+				alert(data.mensagem);
+			})
+			.catch(error => {
+				console.error('Erro ao realizar a requisição:', error);
+				alert('Erro ao conectar ao servidor.');
+			});
+		});
+	</script>
 </body>
 </html>
-

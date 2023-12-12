@@ -64,8 +64,7 @@ async function realizaVenda(req, res){
 // Captura e valida os dados, e chama o service relacionado a listar uma venda selecionada por seu id cadastrado no banco de dados
 async function getUmaVenda(req, res){
     
-    const idVenda = Number(req.params.idvenda)
-
+    const idVenda = Number(req.params.idVenda)
     if (validarIdVenda(idVenda)){
         try {
             const resultado = await vendaServices.getUmaVenda(idVenda)
@@ -81,7 +80,7 @@ async function getUmaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a cancelar uma venda selecionada por seu id cadastrado no banco de dados
 async function cancelaVenda(req, res){
-    const idVenda = Number(req.params.idvenda)
+    const idVenda = Number(req.params.idVenda)
 
     if (validarIdVenda(idVenda)){
         try {
@@ -98,10 +97,9 @@ async function cancelaVenda(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar uma venda selecionada por seu id cadastrado no banco de dados
 async function alterarVenda(req, res){
-    const idVenda = Number(req.params.idvenda)
+    const idVenda = Number(req.body.idVenda)
     const nomeCliente = req.body.nomecliente
     const formaPagto = req.body.formapagto
-
     if (validarIdVenda(idVenda)){
         if(!nomeCliente || !formaPagto){
             res.status(400).json({mensagem: 'Todos os atributos são obrigatorios e não podem ser nulos!'})

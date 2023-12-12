@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
+	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de cadastro de funcionario</title>
-    <link rel="stylesheet" href="Cadastrar.css">
+	<title>Pagina de cadastro de funcionario</title>
+	<link rel="stylesheet" href="Cadastrar.css">
 </head>
+
 <body>
-	
+
 	<header>
 		<i href="">
 			<img src="logo.png" width="120" height="35">
@@ -18,28 +20,66 @@
 		</nav>
 	</header>
 
-	<form action="http://localhost:3000/funcionario" method="post">
-	  <label for="cpf">cpf:</label><br>
-	  <input type="text" id="cpf" name="cpf" ><br>
-	  
-	  <label for="nome">nome:</label><br>
-	  <input type="text" id="nome" name="nome"><br>
-	  
-	  <label for="cargo">cargo:</label><br>
-	  <input type="text" id="cargo" name="cargo"><br>
-	  
-	  <label for="salario">Salario:</label><br>
-	  <input type="text" id="salario" name="salario"><br>
-	  
-	  <label for="endereco">endereco:</label><br>
-	  <input type="text" id="endereco" name="endereco"><br>
-	  
-	  <label for="admissao">Data de Admissao:</label><br>
-	  <input type="date" id="admissao" name="admissao"><br><br>
-	  
-	  <button type="submit">Enviar</button>
-	  <button type="reset">Limpar</button>
-	</form> 
-</body>
-</html>
+	<form id="formulario" method="post">
+		<label for="cpf">CPF:</label><br>
+		<input type="text" id="cpf" name="cpf"><br>
 
+		<label for="nome">Nome:</label><br>
+		<input type="text" id="nome" name="nome"><br>
+
+		<label for="cargo">Cargo:</label><br>
+		<input type="text" id="cargo" name="cargo"><br>
+
+		<label for="salario">Salario:</label><br>
+		<input type="text" id="salario" name="salario"><br>
+
+		<label for="endereco">Endereço:</label><br>
+		<input type="text" id="endereco" name="endereco"><br>
+
+		<label for="admissao">Data de Admissao:</label><br>
+		<input type="date" id="admissao" name="admissao"><br><br>
+
+		<button type="submit">Enviar</button>
+		<button type="reset">Limpar</button>
+	</form>
+</body>
+<script>
+	document.getElementById('formulario').addEventListener('submit', function (event) {
+		event.preventDefault(); // Impede o envio padrão do formulário
+		const cpf = document.getElementById('cpf').value;
+		const nome = document.getElementById('nome').value;
+		const cargo = document.getElementById('cargo').value;
+		const salario = document.getElementById('salario').value;
+		const endereco = document.getElementById('endereco').value;
+		const admissao = document.getElementById('admissao').value;
+
+		// Construir objeto com as modificações
+		const insercao = {
+			cpf: cpf,
+			nome: nome,
+			cargo: cargo,
+			salario: salario,
+			endereco: endereco,
+			admissao: admissao,
+		};
+		// Enviar as modificações para o servidor usando o método PUT
+		fetch(`http://localhost:3000/funcionario/`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(insercao),
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			alert(data.mensagem);
+		})
+		.catch(error => {
+			console.error('Erro ao realizar a requisição:', error);
+			alert('Erro ao conectar ao servidor.');
+		});
+	});
+</script>
+
+</html>

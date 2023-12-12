@@ -14,16 +14,16 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(cors())
+app.use(cors());
 
 // converte o objeto request no formato JSON
-app.use(express.json())
-
-// configura o nome da pasta onde os arquivos estáticos estarão
-app.use(express.static('view'))
+app.use(express.json());
 
 // faz o Parser dos pacotes recebidos
 app.use(bodyParser.urlencoded({extended:true}))
+
+// configura o nome da pasta onde os arquivos estáticos estarão
+app.use(express.static('view'))
 
 // utiliza o router da pasta funcionario
 app.use("/funcionario", funcionarioRouter)

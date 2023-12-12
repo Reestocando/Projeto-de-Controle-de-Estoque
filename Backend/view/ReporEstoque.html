@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de excluir venda</title>
-    <link rel="stylesheet" href="ExcluirVenda.css">
+    <title>Página de repor estoque</title>
+    <link rel="stylesheet" href="Altera.css">
 </head>
 <body>
 	
@@ -17,15 +17,45 @@
 		</nav>
 	</header>
 
-    <form action="http://localhost:3000/estoque/repor/:" method="put">
+    <div class="form-container" id="reporForm">
+        <form onsubmit="reporEstoque(event)">
+            <label for="codProduto">Código do produto:</label><br>
+            <input type="text" id="codProduto" name="codProduto" required><br>
 
-        <label for="codProduto">Codigo do produto:</label><br>
-        <input type="text" id="codProduto" name="codProduto"><br>
+            <label for="qtdEstoque">Quantidade:</label><br>
+            <input type="text" id="qtdEstoque" name="qtdEstoque" required><br>
 
-        <label for="qtdEstoque">Quantidade:</label><br>
-        <input type="text" id="qtdEstoque" name="qtdEstoque"><br>
+            <button type="submit">Repor</button>
+        </form>
+    </div>
 
-        <button type="submit">Repor</button>
-    </form> 
+    <script>
+        async function reporEstoque(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            const codProduto = document.getElementById('codProduto').value;
+            const qtdEstoque = document.getElementById('qtdEstoque').value;
+
+            try {
+                const response = await fetch(`http://localhost:3000/estoque/repor/${codProduto}`, {
+                    method: 'PUT', // Use PUT para uma requisição de reposição
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ qtdEstoque }),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.mensagem);  // Mensagem de sucesso
+                } else {
+                    alert(data.mensagem); // Mensagem de erro
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+                alert('Erro ao conectar ao servidor.');
+            }
+        }
+    </script>
 </body>
 </html>

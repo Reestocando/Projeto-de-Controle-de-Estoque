@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +7,47 @@
     <link rel="stylesheet" href="Listar.css">
 </head>
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuFuncionario.html">Menu</a>
-		</nav>
-	</header>
+    
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuFuncionario.html">Menu</a>
+        </nav>
+    </header>
 
-    <form action="http://localhost:3000/Funcionario" method="get">
-       
-        <button type="submit">Listar</button>
-    </form> 
+    <div class="funcionarios-lista">
+        <h1>Lista de Funcionários</h1>
+        <button onclick="listarFuncionarios()">Listar</button>
+        <ul id="listaFuncionarios"></ul>
+    </div>
 
+    <script>
+        async function listarFuncionarios() {
+            const listaFuncionarios = document.getElementById('listaFuncionarios');
+
+            try {
+                const response = await fetch('http://localhost:3000/funcionario');
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Limpar a lista
+                    listaFuncionarios.innerHTML = '';
+
+                    // Adicionar cada funcionário à lista
+                    data.forEach(funcionario => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `Nome: ${funcionario.nome}, CPF: ${funcionario.cpf}, Cargo: ${funcionario.cargo}, Salário: ${funcionario.salario}`;
+                        listaFuncionarios.appendChild(listItem);
+                    });
+                } else {
+                    console.error(data); // Aqui você pode decidir o que fazer com a resposta de erro
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+            }
+        }
+    </script>
 </body>
 </html>

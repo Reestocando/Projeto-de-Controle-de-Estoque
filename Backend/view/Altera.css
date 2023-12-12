@@ -35,12 +35,17 @@ header a{
     background-color: #D9D9D9;
     padding: 20px;
     border-radius: 8px;
-    position: abso lute;
+    position: absolute;
         top: 37%;
         left: 35%;
         width: 50%;
         height: 50%;    
 
+}
+#formFuncionario, #formProduto, #formVenda {
+    text-align: center;
+    background-color: #D9D9D9;
+    padding: 20px;
 }
 
 label {

@@ -57,21 +57,23 @@ async function alterarFuncionario(cpf, nome, cargo, salario, endereco, admissao)
 }
 
 //Conecta e executa uma operação SQL relacionada a listar um funcionario por seu cpf
-async function getUmFuncionario(cpf){
-    var resultado = null;
+async function getUmFuncionario(cpf) {
+    let resultado = null;
     const conn = await BD.conectar();
 
-    try{
-        var query = await conn.query("select * from funcionario where cpf=$1", [cpf]);
-        console.log(query.rows)
-        resultado = query.rows
-    } catch(err){
-        console.log(err)
-    } finally{
-        conn.release()
+    try {
+        const query = await conn.query("SELECT * FROM funcionario WHERE cpf = $1 LIMIT 1", [cpf]);
+        console.log(query.rows);
+
+        // Verifica se há algum resultado antes de atribuir à variável resultado
+        resultado = query.rows.length > 0 ? query.rows[0] : null;
+    } catch (err) {
+        console.error(err);
+    } finally {
+        conn.release();
     }
 
-    return resultado
+    return resultado;
 }
 
 //Conecta e executa uma operação SQL relacionada a excluir um funcionario por seu cpf

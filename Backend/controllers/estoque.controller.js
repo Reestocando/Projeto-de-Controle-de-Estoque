@@ -38,8 +38,7 @@ async function cadastraProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a listagem de um produto por seu codigo de barras
 async function getUmProduto(req, res){
-    const codBarras = req.params.codbarras
-
+    const codBarras = req.params.codBarras;
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             try {
@@ -58,8 +57,7 @@ async function getUmProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a exclusão de um produto por seu codigo de barras
 async function excluiProduto(req, res){
-    const codBarras = req.params.codbarras
-
+    const codBarras = req.params.codBarras
     if(estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             try {
@@ -78,12 +76,11 @@ async function excluiProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a alterar um produto por seu codigo de barras
 async function alterarProduto(req, res){
-    const codBarras = req.params.codbarras
+    const codBarras = req.body.codProduto
     const nomeProd = req.body.nomeprod
     const custo = req.body.custo
     const preco = req.body.preco
     const fornecedor = req.body.fornecedor
-
     if (estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             if (!nomeProd || !fornecedor || custo===null || preco===null){
@@ -107,9 +104,8 @@ async function alterarProduto(req, res){
 
 // Captura e valida os dados, e chama o service relacionado a reposição de um produto por seu codigo de barras no estoque
 async function reporEstoque(req, res){
-    const codBarras = req.params.codbarras
-    const qtdEstoque = req.body.qtdestoque
-
+    const codBarras = req.params.codBarras
+    const qtdEstoque = req.body.qtdEstoque
     if (estoqueServices.validarCodBarras(codBarras)) {
         if(await estoqueServices.verificarExistenciaCodBarras(codBarras)) {
             if (qtdEstoque===null){

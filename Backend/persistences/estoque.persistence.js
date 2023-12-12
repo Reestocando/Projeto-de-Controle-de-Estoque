@@ -64,9 +64,10 @@ async function getUmProduto(codBarras){
     const conn = await BD.conectar();
 
     try{
-        var query = await conn.query("select * from estoque where codBarras=$1", [codBarras]);
+        var query = await conn.query("select * from estoque where codBarras=$1 LIMIT 1", [codBarras]);
         console.log(query.rows)
-        resultado = query.rows
+        // Verifica se há algum resultado antes de atribuir à variável resultado
+        resultado = query.rows.length > 0 ? query.rows[0] : null;
     } catch(err){
         console.log(err)
     } finally{

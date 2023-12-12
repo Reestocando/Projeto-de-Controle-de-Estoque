@@ -1,42 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de excluir produto</title>
+    <title>Página de excluir produto</title>
     <link rel="stylesheet" href="Excluir.css">
 </head>
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuProduto.html">Menu</a>
-		</nav>
-	</header>
+    
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuProduto.html">Menu</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1>Excluir Produto</h1>
+        <label for="codbarras">Código de Barras do Produto:</label>
+        <input type="text" id="codbarras" name="codbarras" placeholder="Digite o Código de Barras"><br>
+        <button onclick="deletarProduto()">Excluir</button>
+    </div>
 
     <script>
         async function deletarProduto() {
-            let codbarras = document.getElementById("codbarras").value;
-            let url = "http://localhost:3000/estoque/" + codbarras
-            console.log(url)
-            await fetch(url, {
-             method: 'DELETE'
-           })
-           .then(res => res.json())
-           .then(data => console.log(data))
-           .catch(error => console.error(error));
+            const codbarras = document.getElementById("codbarras").value;
+            const url = `http://localhost:3000/estoque/${codbarras}`;
+
+            try {
+                const response = await fetch(url, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.mensagem);  // Aqui você pode decidir o que fazer com a resposta, por exemplo, exibir uma mensagem de sucesso
+                } else {
+                    alert(data.mensagem); // Aqui você pode decidir o que fazer com a resposta de erro
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+            }
         }
-      </script>
-
-    <form action="http://localhost:3000/estoque/" method="delete">
-
-        <label for="codbarras">Codigo de Barras do produto:</label><br>
-        <input type="text" id="codbarras" name="codbarras"><br>
-        <button onclick="deletarProduto()">Botao excluir</button>
-      </form> 
+    </script>
 </body>
 </html>
-

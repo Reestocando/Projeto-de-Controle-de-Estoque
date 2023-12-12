@@ -1,26 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de listar vendas</title>
+    <title>Página de listar vendas</title>
     <link rel="stylesheet" href="Listar.css">
 </head>
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuVenda.html">Menu</a>
-		</nav>
-	</header>
+    
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuVenda.html">Menu</a>
+        </nav>
+    </header>
 
-    <form action="http://localhost:3000/venda" method="get">
-       
-        <button type="submit">Listar</button>
-    </form> 
+    <div class="vendas-lista">
+        <h1>Lista de Vendas</h1>
+        <button onclick="listarVendas()">Listar</button>
+        <ul id="listaVendas"></ul>
+    </div>
 
+    <script>
+        async function listarVendas() {
+            const listaVendas = document.getElementById('listaVendas');
+
+            try {
+                const response = await fetch('http://localhost:3000/venda');
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Limpar a lista
+                    listaVendas.innerHTML = '';
+
+                    // Adicionar cada venda à lista
+                    data.forEach(venda => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `ID da venda: ${venda.idvenda}, CPF do Vendedor: ${venda.cpfvendedor}, Nome do Cliente: ${venda.nomecliente}, Código de Barras do Produto: ${venda.codproduto}, Forma de Pagamento: ${venda.formapagto}, Data da Venda: ${venda.datavenda}`;
+                        listaVendas.appendChild(listItem);
+                    });
+                } else {
+                    console.error(data); // Aqui você pode decidir o que fazer com a resposta de erro
+                }
+            } catch (error) {
+                console.error('Erro ao realizar a requisição:', error);
+            }
+        }
+    </script>
 </body>
 </html>

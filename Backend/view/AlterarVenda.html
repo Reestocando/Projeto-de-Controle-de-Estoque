@@ -1,33 +1,135 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina de alterar venda</title>
+    <title>Página de alterar venda</title>
     <link rel="stylesheet" href="Altera.css">
 </head>
+
 <body>
-	
-	<header>
-		<i href="">
-			<img src="logo.png" width="120" height="35">
-		</i>
-		<nav>
-			<a href="MenuVenda.html">Menu</a>
-		</nav>
-	</header>
 
-    <form action="http://localhost:3000/venda/:idvenda" method="put">
+    <header>
+        <i href="">
+            <img src="logo.png" width="120" height="35">
+        </i>
+        <nav>
+            <a href="MenuVenda.html">Menu</a>
+        </nav>
+    </header>
 
-        <label for="idVenda">ID da venda:</label><br>
-        <input type="text" id="idVenda" name="idVenda"><br>
+    <div class="form-container">
+        <h1>Alterar Venda</h1>
+        <label for="idVenda">ID da Venda:</label><br>
+        <input type="text" id="idVenda" name="idVenda">
 
-        <label for="idVenda">ID da venda:</label><br>
-        <input type="text" id="idVenda" name="idVenda"><br>
-        
-        <button type="submit">Buscar</button>
-      </form> 
+        <button type="button" onclick="buscarVenda()">Buscar</button>
+
+        <!-- Formulário para exibir os dados da venda -->
+        <form id="formVenda" style="display: none;">
+            <label for="cpfvendedor">CPF do Vendedor:</label>
+            <input type="text" id="cpfvendedor" name="cpfvendedor">
+
+            <label for="nomecliente">Nome do Cliente:</label>
+            <input type="text" id="nomecliente" name="nomecliente">
+
+            <label for="codproduto">Código de Barras do Produto:</label>
+            <input type="text" id="codproduto" name="codproduto">
+
+            <label for="formapagto">Forma de Pagamento:</label>
+            <input type="text" id="formapagto" name="formapagto">
+
+            <label for="datavenda">Data da Venda:</label>
+            <input type="text" id="datavenda" name="datavenda">
+
+            <button type="button" onclick="enviarModificacoes()">Enviar Modificações</button>
+        </form>
+
+        <p id="result-message"></p>
+    </div>
+
+    <script>
+        function buscarVenda() {
+            const idVenda = document.getElementById('idVenda').value;
+            const formVenda = document.getElementById('formVenda');
+            const resultMessage = document.getElementById('result-message');
+
+            fetch(`http://localhost:3000/venda/${idVenda}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    if (data.error) {
+                        resultMessage.textContent = data.error;
+                        formVenda.style.display = 'none';
+                    } else {
+                        resultMessage.textContent = '';
+                        formVenda.style.display = 'block';
+
+                        // Preencher os campos do formulário
+                        document.getElementById('cpfvendedor').value = data.cpfvendedor;
+                        document.getElementById('nomecliente').value = data.nomecliente;
+                        document.getElementById('codproduto').value = data.codproduto;
+                        document.getElementById('formapagto').value = data.formapagto;
+                        document.getElementById('datavenda').value = data.datavenda;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao realizar a requisição:', error);
+                    resultMessage.textContent = 'Erro ao conectar ao servidor.';
+                    formVenda.style.display = 'none';
+                });
+        }
+
+        function enviarModificacoes() {
+            const idVenda = document.getElementById('idVenda').value;
+            const cpfvendedor = document.getElementById('cpfvendedor').value;
+            const nomecliente = document.getElementById('nomecliente').value;
+            const codproduto = document.getElementById('codproduto').value;
+            const formapagto = document.getElementById('formapagto').value;
+            const datavenda = document.getElementById('datavenda').value;
+
+            // Construir objeto com as modificações
+            const modificacoes = {
+                idVenda: idVenda,
+                cpfvendedor: cpfvendedor,
+                nomecliente: nomecliente,
+                codproduto: codproduto,
+                formapagto: formapagto,
+                datavenda: converterData(datavenda)
+            };
+            console.log(modificacoes);
+            // Enviar as modificações para o servidor usando o método PUT
+            fetch(`http://localhost:3000/venda/${idVenda}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(modificacoes),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.mensagem);
+                })
+                .catch(error => {
+                    console.error('Erro ao realizar a requisição:', error);
+                    alert('Erro ao conectar ao servidor.');
+                });
+        }
+        function converterData(dataString) {
+            const data = new Date(dataString);
+
+            // Obtém o ano, mês e dia da data
+            const ano = data.getFullYear();
+            const mes = String(data.getMonth() + 1).padStart(2, '0'); // Adiciona zero à esquerda se necessário
+            const dia = String(data.getDate()).padStart(2, '0'); // Adiciona zero à esquerda se necessário
+
+            // Formata a data como uma string "YYYY-MM-DD"
+            const dataFormatada = `${ano}-${mes}-${dia}`;
+
+            return dataFormatada;
+        }
+    </script>
 </body>
-</html>
 
-    
+</html>
